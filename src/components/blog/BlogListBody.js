@@ -7,7 +7,7 @@ import configureStore from "./store"
 
 const store = configureStore()
 
-export default class BlogBody extends React.Component {
+export default class BlogListBody extends React.Component {
     render() {
         return (
             <div style={{minHeight: getHeightByRadio()}} className="dark-gray-back">
