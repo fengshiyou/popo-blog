@@ -19,7 +19,7 @@ export default class BlogListItem extends React.Component {
         return (
             <div className="blog-item">
                 <div className="blog-item-title">
-                    <Link className="black" to="/">{this.props.title}</Link>
+                    <Link className="black" to={`/blog/article/${this.props.id}`}>{this.props.title}</Link>
                 </div>
                 <div className="blog-item-tag inline">
                     <Icon type="calendar"/>

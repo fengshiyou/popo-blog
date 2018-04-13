@@ -25,6 +25,7 @@ class BlogList extends React.Component {
                 created_at={value.created_at}
                 labels={value.labels}
                 category={value.category}
+                id={value.number}
             />)
         });
         return item_list;
