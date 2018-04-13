@@ -1,0 +1,44 @@
+@import '~antd/dist/antd.min.css';
+/*去掉body margin*/
+body {
+    margin: 0;
+}
+
+/*黑背景*/
+.black-back {
+    background-color: black;
+}
+
+/*深灰背景*/
+.dark-gray-back {
+    background-color: rgb(50, 50, 50);
+}
+
+/*深灰背景*/
+.white-back {
+    background-color: white;
+}
+/*深灰背景*/
+.gray-back {
+    background-color: gray;
+}
+/*内容居中*/
+.text-center {
+    text-align: center;
+}
+
+.margin-l-50 {
+    margin-left: 50px;
+}
+.margin-t-50 {
+    margin-top: 50px;
+}
+.white{
+    color: white;
+}
+.black{
+    color: black;
+}
+.inline {
+    display: inline;
+}

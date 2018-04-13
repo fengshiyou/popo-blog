@@ -1,0 +1,20 @@
+.my-detail h1{
+    color: white;
+}
+.my-detail{
+    color: white;
+}
+.my-detail img {
+    margin-top: 100px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    height: 100px;
+}
+.my-detail-link {
+    display: inline;
+    font-size: 18px;
+}
+.my-detail-link:after {
+    content: "/";
+}

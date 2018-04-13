@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Index from './components/index'
+import "./css/base/Base.css"
 
 
 
 ReactDOM.render(
-    <div>init</div>,
+    <Index/>,
     document.getElementById('index')
 );

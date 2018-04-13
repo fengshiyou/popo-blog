@@ -1,0 +1,19 @@
+.blog-item{
+    padding:30px 20px;
+    border-bottom:1px solid black;
+}
+
+.blog-item-tag{
+    font-size: 1.2em;
+}
+.blog-item-tag a,.blog-item-tag span{
+    color: white;
+    padding: 0px 5px;
+    margin: 0px 5px;
+    font-size: 15px;
+    display: inline-block;
+}
+.blog-item-title {
+    height: 50px;
+    font-size: 20px;
+}
