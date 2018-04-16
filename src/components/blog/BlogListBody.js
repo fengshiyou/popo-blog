@@ -20,7 +20,6 @@ export default class BlogListBody extends React.Component {
                     <Col span={5} className="white-back margin-l-50 margin-t-50">
                         <div>标签和目录导航</div>
                     </Col>
-
                 </Row>
             </div>
         )

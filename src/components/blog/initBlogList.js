@@ -3,7 +3,6 @@ import {getConfig} from "../../until/Tool";
 
 function getList() {
     return (dispatch) => {
-
         //请求中
         dispatch({type: "REQUEST"});
         const url = getConfig("request_blog_list");

@@ -1,0 +1,132 @@
+@import '~highlight.js/styles/atom-one-dark.css';
+.content-title {
+    width: 100%;
+    height: 100px;
+    font-size: 2em;
+    text-align: center;
+    line-height: 100px;
+}
+
+.content-time {
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.content-detail {
+    padding: 10px 40px 20px 40px;
+    line-height: 1.6;
+}
+
+.content-detail h2 {
+    margin: 1.1em 0px;
+    font-size: 1.8em;
+}
+
+.content-detail h3 {
+    margin: 1.1em 0;
+    font-size: 1.6em;
+}
+
+.content-detail h4 {
+    margin: 1.1em 0;
+    font-size: 1.4em;
+}
+
+.content-detail p {
+    margin: 1.1em 0;
+    font-size: 1.1em;
+}
+
+.content-detail ul, ol {
+    margin: 1.1em 0;
+    padding-left: 1.1em;
+}
+
+.content-detail li {
+    font-size: 1em;
+    list-style-type: disc;
+}
+
+.content-detail blockquote {
+    padding: 1px 10px;
+    border-left: 2px solid black;
+    background: rgb(200, 200, 200);
+}
+
+.content-detail p code, .content-detail ul code {
+    display: inline-block;
+    margin: 0 2px;
+    padding: 0 4px;
+    color: rgb(29, 31, 33);
+    border-radius: 3px;
+    line-height: 20px;
+    background: rgb(200, 200, 200);
+    border: 1px solid #ddd;
+}
+
+.content-detail pre code {
+    display: block;
+    margin: 20px 0px;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: rgb(29, 31, 33);
+    color: rgb(200, 200, 200);
+    padding: 10px 20px;
+    font-family: Consolas;
+    font-size: 1.1em;
+    line-height: 1.5;
+    border-radius: 10px;
+}
+
+.content-detail table {
+    width: 100%;
+    border: 1px solid;
+    font-size: 1.1em;
+    border-collapse: collapse;
+}
+
+.content-detail p>img {
+    max-width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+
+.content-detail th, .content-detail td {
+    height: 50px;
+    padding: 0px 20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.content-detail table>tbody>tr:nth-child(odd)>td, .content-detail table>tbody>tr:nth-child(odd)>th {
+    background-color: #f9f9f9;
+}
+
+.content-navigation-content {
+    padding-left: 20px;
+}
+
+.content-navigation-content ul {
+    padding: 5px;
+}
+
+.content-navigation-content li {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.content-comment-box {
+    width: 98%;
+    height: 50px;
+    font-size: 1.3em;
+    border-top: 1px solid rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.content-comment-box a {
+    text-decoration: none;
+    color: red;
+}

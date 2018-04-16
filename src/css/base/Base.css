@@ -18,10 +18,12 @@ body {
 .white-back {
     background-color: white;
 }
+
 /*深灰背景*/
 .gray-back {
     background-color: gray;
 }
+
 /*内容居中*/
 .text-center {
     text-align: center;
@@ -30,15 +32,24 @@ body {
 .margin-l-50 {
     margin-left: 50px;
 }
+
 .margin-t-50 {
     margin-top: 50px;
 }
-.white{
+
+.white {
     color: white;
 }
-.black{
+
+.black {
     color: black;
 }
+
 .inline {
     display: inline;
+}
+
+/*下划线*/
+.borderBottom {
+    border-bottom: solid 2px black;
 }

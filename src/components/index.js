@@ -13,7 +13,7 @@ export default class Index extends React.Component {
                 <div>
                     <Route path="/" component={HomeHeader}/>
                     <Route exact path="/" component={HomeBody}/>
-                    <Route exact path="/blog" component={BlogBody}/>
+                    <Route path="/blog" component={BlogBody}/>
                     <Route path="/" component={HomeFooter}/>
                 </div>
             </HashRouter>

@@ -1,0 +1,8 @@
+.menu-item {
+    margin-top:10px;
+}
+.menu-item:before{
+    content:"●";
+    line-height: 2.5em;
+    margin: 1em;
+}
