@@ -9,6 +9,7 @@ export default class HomeHeaderNav extends React.Component {
                 <Link to="/blog" className="home-header-nav-item text-center">博客大厅</Link>
                 <Link to="/" className="home-header-nav-item text-center">关于</Link>
                 <Link to="/" className="home-header-nav-item text-center">留言</Link>
+                <Link to="/editor" className="home-header-nav-item text-center">临时编译器</Link>
             </div>
         )
     }

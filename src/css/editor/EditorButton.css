@@ -1,0 +1,89 @@
+.editor-toolbar a {
+    width: 50px;
+    height: 30px;
+    margin-left: 20px;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.fa-bold:before {
+    content: "加粗"
+}
+.fa-italic:before {
+    content: "倾斜";
+}
+.fa-strikethrough:before {
+    content: "删除";
+}
+.fa-header:before {
+    content: "H";
+}
+
+.fa-header-1:after {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 65%;
+    vertical-align: text-bottom;
+    position: relative;
+    top: 2px;
+    content:"1";
+}
+.fa-header-2:after {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 65%;
+    vertical-align: text-bottom;
+    position: relative;
+    top: 2px;
+    content:"2";
+}
+.fa-header-3:after {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 65%;
+    vertical-align: text-bottom;
+    position: relative;
+    top: 2px;
+    content:"3";
+}
+.fa-code:before{
+    content: "代码块";
+}
+.fa-list-ul:before{
+    content: "ul";
+}
+.fa-list-ol:before{
+    content: "ol";
+}
+.fa-link:before{
+    content: "链接";
+}
+.fa-picture-o:before{
+    content: "图片";
+}
+.fa-table:before{
+    content: "表格";
+}
+.fa-minus:before{
+    content: "分割线";
+}
+.fa-eye:before{
+    content: "预览";
+}
+.fa-columns:before{
+    content: "分屏";
+}
+.fa-arrows-alt:before{
+    content: "全屏";
+}
+.fa-question-circle:before{
+    content: "帮助";
+}
+.fa-undo:before{
+    content: "回退";
+}
+.fa-repeat:before{
+    content: "前进";
+}

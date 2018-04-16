@@ -1,0 +1,201 @@
+/*分屏预览*/
+.editor-preview-active-side h2 {
+    margin: 1.1em 0px;
+    font-size: 1.8em;
+}
+
+.editor-preview-active-side h3 {
+    margin: 1.1em 0;
+    font-size: 1.6em;
+}
+
+.editor-preview-active-side h4 {
+    margin: 1.1em 0;
+    font-size: 1.4em;
+}
+
+.editor-preview-active-side p {
+    margin: 1.1em 0;
+    font-size: 1.1em;
+}
+
+.editor-preview-active-side ul, ol {
+    margin: 1.1em 0;
+    padding-left: 1.1em;
+}
+
+.editor-preview-active-side li {
+    font-size: 1em;
+    list-style-type: disc;
+}
+
+.editor-preview-active-side blockquote {
+    padding: 1px 10px;
+    border-left: 2px solid black;
+    background: rgb(200, 200, 200);
+}
+
+.editor-preview-active-side p code, .editor-preview-active-side ul code {
+    display: inline-block;
+    margin: 0 2px;
+    padding: 0 4px;
+    color: rgb(29, 31, 33);
+    border-radius: 3px;
+    line-height: 20px;
+    background: rgb(200, 200, 200);
+    border: 1px solid #ddd;
+}
+
+.editor-preview-active-side pre code {
+    display: block;
+    margin: 20px 0px;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: rgb(29, 31, 33);
+    color: rgb(200, 200, 200);
+    padding: 10px 20px;
+    font-family: Consolas;
+    font-size: 1.1em;
+    line-height: 1.5;
+    border-radius: 10px;
+}
+
+.editor-preview-active-side table {
+    width: 100%;
+    border: 1px solid;
+    font-size: 1.1em;
+    border-collapse: collapse;
+}
+
+.editor-preview-active-side p>img {
+    max-width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+
+.editor-preview-active-side th, .editor-preview-active-side td {
+    height: 50px;
+    padding: 0px 20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.editor-preview-active-side table>tbody>tr:nth-child(odd)>td, .editor-preview-active-side table>tbody>tr:nth-child(odd)>th {
+    background-color: #f9f9f9;
+}
+/*分屏预览结束*/
+/*全屏预览*/
+.editor-preview-active h2 {
+    margin: 1.1em 0px;
+    font-size: 1.8em;
+}
+
+.editor-preview-active h3 {
+    margin: 1.1em 0;
+    font-size: 1.6em;
+}
+
+.editor-preview-active h4 {
+    margin: 1.1em 0;
+    font-size: 1.4em;
+}
+
+.editor-preview-active p {
+    margin: 1.1em 0;
+    font-size: 1.1em;
+}
+
+.editor-preview-active ul, ol {
+    margin: 1.1em 0;
+    padding-left: 1.1em;
+}
+
+.editor-preview-active li {
+    font-size: 1em;
+    list-style-type: disc;
+}
+
+.editor-preview-active blockquote {
+    padding: 1px 10px;
+    border-left: 2px solid black;
+    background: rgb(200, 200, 200);
+}
+
+.editor-preview-active p code, .editor-preview-active ul code {
+    display: inline-block;
+    margin: 0 2px;
+    padding: 0 4px;
+    color: rgb(29, 31, 33);
+    border-radius: 3px;
+    line-height: 20px;
+    background: rgb(200, 200, 200);
+    border: 1px solid #ddd;
+}
+
+.editor-preview-active pre code {
+    display: block;
+    margin: 20px 0px;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: rgb(29, 31, 33);
+    color: rgb(200, 200, 200);
+    padding: 10px 20px;
+    font-family: Consolas;
+    font-size: 1.1em;
+    line-height: 1.5;
+    border-radius: 10px;
+}
+
+.editor-preview-active table {
+    width: 100%;
+    border: 1px solid;
+    font-size: 1.1em;
+    border-collapse: collapse;
+}
+
+.editor-preview-active p>img {
+    max-width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+
+.editor-preview-active th, .editor-preview-active td {
+    height: 50px;
+    padding: 0px 20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.editor-preview-active table>tbody>tr:nth-child(odd)>td, .editor-preview-active table>tbody>tr:nth-child(odd)>th {
+    background-color: #f9f9f9;
+}
+/*全屏预览结束*/
+
+.content-navigation-content {
+    padding-left: 20px;
+}
+
+.content-navigation-content ul {
+    padding: 5px;
+}
+
+.content-navigation-content li {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.content-comment-box {
+    width: 98%;
+    height: 50px;
+    font-size: 1.3em;
+    border-top: 1px solid rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.content-comment-box a {
+    text-decoration: none;
+    color: red;
+}
