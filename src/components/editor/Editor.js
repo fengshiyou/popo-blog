@@ -2,15 +2,45 @@ import React from 'react'
 import marked from 'marked'
 import SimpleMDE from 'simplemde'
 import highlight from 'highlight.js'
+import SelectTag from "./SelectTag"
 import 'simplemde/debug/simplemde.css'
+import {Button, Input} from 'antd'
+import {getConfig} from '../../until/Tool'
+import axios from 'axios'
 import '../../css/editor/EditorButton.css'
 import '../../css/editor/Preview.css'
+import '../../css/editor/Editor.css'
 
 
 export default class Editor extends React.Component {
     constructor() {
         super();
-        this.state = {smde: null};
+        this.state = {smde: null, title: null, tags: null, catalog: null};
+        this.save = () => this._save();
+        this.setTitle = (e) => this._setTitle(e);
+        this.setTags = (tags) => this._setTags(tags);
+    }
+
+    _setTitle(e) {
+        this.setState({title: e.target.value});
+    }
+    _setTags(tags){
+        this.setState({tags})
+    }
+    _save() {
+        axios.post(
+            getConfig("request_save_blog"),
+            {
+                'blog_id': false,//this.props.blog_id,
+                'title': this.state.title,
+                'tags': this.state.tags,
+                'catalog_id': this.state.catalog,
+                'content': this.state.smde.value()
+            }
+        ).then(
+            response => {
+            }
+        ).catch(e => console.log(e))
     }
 
     componentDidMount() {
@@ -42,7 +72,16 @@ export default class Editor extends React.Component {
 
     render() {
         return (
-            <textarea id="editor"/>
+            <div>
+                <div className="editor-title">
+                    <Input placeholder="请在这里输入标题" size="large" onChange={this.setTitle}/>
+                </div>
+                <SelectTag setTags={this.setTags}/>
+                <div className="margin-t-50">
+                    <textarea id="editor"/>
+                </div>
+                <Button onClick={this.save} type="primary">保存</Button>
+            </div>
         )
     }
 }
