@@ -16,7 +16,7 @@ import '../../css/editor/Editor.css'
 export default class Editor extends React.Component {
     constructor() {
         super();
-        this.state = {smde: null, title: null, tags: null, catalog: null};
+        this.state = {smde: null, title: "请在这里输入标题", tags: null, catalog: null};
         this.save = () => this._save();
         this.setTitle = (e) => this._setTitle(e);
         this.setTags = (tags) => this._setTags(tags);
@@ -34,7 +34,11 @@ export default class Editor extends React.Component {
     _setCatalog(catalog) {
         this.setState({catalog})
     }
-
+    componentDidMount(){
+        //@todo 如果有博客ID   则去获取博客信息  通过ajax或者props传递
+        //@todo  设置默认的文章信息
+        //@todo  如果没有博客ID  是新博客 则去获取default catalog 根目录
+    }
     _save() {
         axios.post(
             getConfig("request_save_blog"),
@@ -74,7 +78,6 @@ export default class Editor extends React.Component {
                 });
             },
         })
-        smde.value("123123123")
         this.setState({smde})
     }
 
@@ -82,10 +85,16 @@ export default class Editor extends React.Component {
         return (
             <div>
                 <div className="editor-title">
-                    <Input placeholder="请在这里输入标题" size="large" onChange={this.setTitle}/>
+                    <Input placeholder={this.state.title} size="large" onChange={this.setTitle}/>
                 </div>
-                <SelectTag setTags={this.setTags}/>
-                <SelectCatalog setCatalog={this.setCatalog}/>
+                <SelectTag
+                    setTags={this.setTags}
+                    defaultValue={[1]}//这个值从后台博客信息中获取   如果是新增博客  则为空
+                />
+                <SelectCatalog
+                    setCatalog={this.setCatalog}
+                    defaultValue={[1]} //这个值从后台博客信息中获取   如果是新增博客  则获取根目录
+                />
                 <div className="margin-t-50">
                     <textarea id="editor"/>
                 </div>

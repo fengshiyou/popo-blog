@@ -6,7 +6,7 @@ import {getConfig} from '../../until/Tool'
 export default class SelectCatalog extends React.Component {
     constructor() {
         super();
-        this.state = {catalog_list: [], defaultValue: [1]};
+        this.state = {catalog_list: []};
         this.formatCatalogList = (catalog_list) => this._formatCatalogList(catalog_list);
         this.setCatalog = (catalog) => this._setCatalog(catalog)
     }
@@ -16,22 +16,20 @@ export default class SelectCatalog extends React.Component {
         this.props.setCatalog(last_catalog);
     }
 
-    componentDidMount() {
+
+    componentWillMount() {
         const url = getConfig("request_get_catalog");
         let catalog_list = [];
         axios.get(url).then(
             response => {
                 const catalog_list = this.formatCatalogList(response.data.data);
                 this.setState({catalog_list});
-                this.setState({defaultValue: [catalog_list[0].value]});
-                this.setCatalog([catalog_list[0].value]);
             }
         ).catch(
             e => console.log(e)
         )
     }
 
-    //@todo 有空重新写一下这个
     _formatCatalogList(catalog_list) {
         let return_arr = [];
         for (let i = 0; i < catalog_list.length; i++) {
@@ -43,16 +41,15 @@ export default class SelectCatalog extends React.Component {
             }
             return_arr.push(obj);
         }
-        return return_arr
+        return return_arr;
     }
 
     render() {
-        function onChange(value) {
-            console.log(value);
-        }
-
         return (
-            <Cascader defaultValue={this.state.defaultValue} options={this.state.catalog_list} onChange={this.setCatalog} changeOnSelect/>
+            <div className="margin-t-50">
+                <span>选择目录：</span>
+                <Cascader defaultValue={this.props.defaultValue} options={this.state.catalog_list} onChange={this.setCatalog} changeOnSelect/>
+            </div>
         );
     }
 }
