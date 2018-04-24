@@ -3,6 +3,7 @@ import marked from 'marked'
 import SimpleMDE from 'simplemde'
 import highlight from 'highlight.js'
 import SelectTag from "./SelectTag"
+import SelectCatalog from "./SelectCatalog"
 import 'simplemde/debug/simplemde.css'
 import {Button, Input} from 'antd'
 import {getConfig} from '../../until/Tool'
@@ -19,14 +20,21 @@ export default class Editor extends React.Component {
         this.save = () => this._save();
         this.setTitle = (e) => this._setTitle(e);
         this.setTags = (tags) => this._setTags(tags);
+        this.setCatalog = (catalog) => this._setCatalog(catalog);
     }
 
     _setTitle(e) {
         this.setState({title: e.target.value});
     }
-    _setTags(tags){
+
+    _setTags(tags) {
         this.setState({tags})
     }
+
+    _setCatalog(catalog) {
+        this.setState({catalog})
+    }
+
     _save() {
         axios.post(
             getConfig("request_save_blog"),
@@ -77,6 +85,7 @@ export default class Editor extends React.Component {
                     <Input placeholder="请在这里输入标题" size="large" onChange={this.setTitle}/>
                 </div>
                 <SelectTag setTags={this.setTags}/>
+                <SelectCatalog setCatalog={this.setCatalog}/>
                 <div className="margin-t-50">
                     <textarea id="editor"/>
                 </div>

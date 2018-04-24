@@ -7,11 +7,13 @@ export default class SelectTag extends React.Component {
     constructor() {
         super();
         this.state = {tags: [], select_tags: []}
-        this.setTags = (tags)=> this._setTags(tags)
+        this.setTags = (tags) => this._setTags(tags)
     }
-    _setTags(tags){
+
+    _setTags(tags) {
         this.props.setTags(tags);
     }
+
     componentDidMount() {
         const url = getConfig("request_get_tags");
         axios.get(url).then(
