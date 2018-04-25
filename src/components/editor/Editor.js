@@ -3,7 +3,7 @@ import marked from 'marked'
 import SimpleMDE from 'simplemde'
 import highlight from 'highlight.js'
 import SelectTag from "./SelectTag"
-import SelectCatalog from "./SelectCatalog"
+import ConnectCatalogSelect from "../../containers/ConnectCatalogSelect"
 import 'simplemde/debug/simplemde.css'
 import {Button, Input} from 'antd'
 import {getConfig} from '../../until/Tool'
@@ -91,10 +91,14 @@ export default class Editor extends React.Component {
                     setTags={this.setTags}
                     defaultValue={[1]}//这个值从后台博客信息中获取   如果是新增博客  则为空
                 />
-                <SelectCatalog
-                    setCatalog={this.setCatalog}
-                    defaultValue={[1]} //这个值从后台博客信息中获取   如果是新增博客  则获取根目录
-                />
+                <div className="margin-t-50">
+                    <span>选择目录：</span>
+                    <ConnectCatalogSelect
+                        onChange={this.setCatalog}
+                        defaultValue={[1]} //这个值从后台博客信息中获取   如果是新增博客  则获取根目录
+                    />
+                </div>
+
                 <div className="margin-t-50">
                     <textarea id="editor"/>
                 </div>

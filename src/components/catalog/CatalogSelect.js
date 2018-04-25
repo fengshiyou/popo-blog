@@ -14,9 +14,9 @@ export default class CatalogSelect extends React.Component {
 
     _onChange(value) {
         //获取最后一个选中项，即为catalog_id
-        let last_catalog_id = value[value.lenght - 1];
+        let last_catalog_id = value[value.length - 1];
         //将结果返回到调用的父组件上
-        this.props.onChange(value);
+        this.props.onChange(last_catalog_id);
     }
 
     componentDidMount() {
@@ -48,7 +48,7 @@ export default class CatalogSelect extends React.Component {
         //格式化数据并且赋值给this.state.catalog_list
         let catalog_list = this.formatCatalogList(this.props.catalog_list);
         return (
-            <Cascader options={catalog_list} changeOnSelect/>
+            <Cascader options={catalog_list} onChange={this.onChang} changeOnSelect/>
         )
     }
 }
