@@ -12,10 +12,11 @@ export default class BlogListItem extends React.Component {
         const category_back_ground_color = {backgroundColor: "red"};
         console.log(this.props.created_at);
         const labels = this.props.labels;
-        labels.map((value, key, arr) => {
-            let back_ground_color = {backgroundColor: value.color}
-            label_list.push(<Link to="/" className="white" key={key} style={back_ground_color}>{value.name}</Link>);
-        });
+        //@todo tags 有全局的变量保存    这里拿到 一个1，2，3的字符串后去全局变量里匹配
+        // labels.map((value, key, arr) => {
+        //     let back_ground_color = {backgroundColor: value.color}
+        //     label_list.push(<Link to="/" className="white" key={key} style={back_ground_color}>{value.name}</Link>);
+        // });
         return (
             <div className="blog-item">
                 <div className="blog-item-title">
@@ -28,7 +29,7 @@ export default class BlogListItem extends React.Component {
                 <div className="blog-item-tag inline">
                     <Icon type="bars"/>
                     <Link className="white" to="/" style={category_back_ground_color}>
-                        {this.props.category.name}
+                        {this.props.catalog}
                     </Link>
                 </div>
                 <div className="blog-item-tag inline">
