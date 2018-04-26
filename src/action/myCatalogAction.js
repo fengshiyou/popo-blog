@@ -37,13 +37,19 @@ export function getMyCatalog() {
 }
 
 //初始化state   isFetching:是否正在请求数据    catalog_list 后台返回的目录列表
-export function catalogReducer(state = {isFetching: false, catalog_list: []}, action) {
+export function catalogReducer(state = {catalog_fetching: false, catalog_list: []}, action) {
     switch (action.type) {
         case "SERVER_CATALOGLIST":
-            return Object.assign({}, state, {isFetching: false, catalog_list: action.catalog_list})
+            return Object.assign({}, state, {catalog_fetching: false, catalog_list: action.catalog_list})
         case "REQUEST_CATALOGLIST":
-            return Object.assign({}, state, {isFetching:true})
+            return Object.assign({}, state, {catalog_fetching:true})
         default:
             return state
     }
+}
+
+//返回props传递的数据
+export function mapStateToProps(state) {
+    const {isFetching, catalog_list} = state.catalogReducer || {isFetching: true, catalog_list: []}
+    return {isFetching, catalog_list}
 }

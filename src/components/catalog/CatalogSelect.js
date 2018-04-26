@@ -1,9 +1,10 @@
 import React from 'react'
 import {Cascader} from 'antd'//导入插件
-import {getMyCatalog} from '../../action/getMyCatalog'
+import {connect} from 'react-redux'
+import {getMyCatalog,mapStateToProps} from '../../action/myCatalogAction'
 
 
-export default class CatalogSelect extends React.Component {
+class CatalogSelect extends React.Component {
     constructor() {
         super();
         //value 是antd-Cascader种的所有选中项的value
@@ -52,3 +53,4 @@ export default class CatalogSelect extends React.Component {
         )
     }
 }
+export default connect(mapStateToProps)(CatalogSelect)
