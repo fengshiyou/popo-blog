@@ -13,13 +13,15 @@ export default class BlogArticle extends React.Component {
     }
 
     componentDidMount() {
+        //获取content_id
+        const content_id = this.props.match.params.id;
         const url = getConfig("request_blog_article");
-        axios.get(
-            url
+        axios.post(
+            url,{content_id}
         ).then(
             response => {
-                this.setState({content: <Content content={response.data.body} title={response.data.title} created_at={response.data.created_at}/>})
-                this.setState({menu_list: this.getMenuList(response.data.body)})
+                this.setState({content: <Content content={response.data.data.content} title={response.data.data.title} created_at={response.data.data.created_at}/>})
+                this.setState({menu_list: this.getMenuList(response.data.data.content)})
             }
         ).catch(e => console.log(e))
     }

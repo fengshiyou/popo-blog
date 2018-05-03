@@ -4,11 +4,15 @@ import {getConfig} from '../until/Tool'
 function fetch() {
     return dispatch => {
         //请求中
-        dispatch({type: "REQUEST_TSGS"})
+        dispatch({type: "REQUEST_TAGS"})
         const url = getConfig("request_get_tags")
         axios.get(url).then(
             response => {
-                dispatch({type: "SERVER_TAGS", items: response.data.data})
+                let items = [];
+                response.data.data.map(function(val,key,arr){
+                    items[val.id] = val;
+                });
+                dispatch({type: "SERVER_TAGS", items})
             }
         ).catch()
     }
@@ -18,10 +22,14 @@ function fetch() {
  * 是否需要请求后台
  */
 function shouldFetch(state) {
-    if (!state.tagsReducer) {
+    //正在请求中
+    if (state.tagsReducer.fetching) {
+        return false;
+    }
+    if (!state.tagsReducer.items) {
         return true;
     }
-    return !state.tagsReducer.length;
+    return !state.tagsReducer.items.length;
 }
 
 export function getAllTags() {

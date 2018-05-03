@@ -9,7 +9,7 @@ function fetch() {
         const url = getConfig("request_get_catalog");
         axios.get(url).then(
             response => {
-                dispatch({type: "SERVER_CATALOGLIST", catalog_list: response.data.data})
+                dispatch({type: "SERVER_CATALOGLIST", items: response.data.data})
             }
         ).catch()
     }
@@ -20,11 +20,11 @@ function fetch() {
  */
 function shouldFetch(state) {
     //判断state中是否有目录列表数据  catalog_list
-    if (!state.catalog_list) {
+    if (!state.catalogReducer) {
         return true;
     }
     //如果有数据 判断catalog_list
-    return !state.catalog_list.length
+    return !state.catalogReducer.items.length
 }
 
 export function getMyCatalog() {
@@ -37,10 +37,10 @@ export function getMyCatalog() {
 }
 
 //初始化state   isFetching:是否正在请求数据    catalog_list 后台返回的目录列表
-export function catalogReducer(state = {catalog_fetching: false, catalog_list: []}, action) {
+export function catalogReducer(state = {catalog_fetching: false, items: []}, action) {
     switch (action.type) {
         case "SERVER_CATALOGLIST":
-            return Object.assign({}, state, {catalog_fetching: false, catalog_list: action.catalog_list})
+            return Object.assign({}, state, {catalog_fetching: false, items: action.items})
         case "REQUEST_CATALOGLIST":
             return Object.assign({}, state, {catalog_fetching:true})
         default:
@@ -50,6 +50,6 @@ export function catalogReducer(state = {catalog_fetching: false, catalog_list: [
 
 //返回props传递的数据
 export function mapStateToProps(state) {
-    const {isFetching, catalog_list} = state.catalogReducer || {isFetching: true, catalog_list: []}
-    return {isFetching, catalog_list}
+    const {isFetching, items} = state.catalogReducer || {isFetching: true, items: []}
+    return {isFetching, items}
 }

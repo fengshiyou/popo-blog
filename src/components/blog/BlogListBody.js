@@ -10,7 +10,7 @@ export default class BlogListBody extends React.Component {
             <div style={{minHeight: getHeightByRadio()}} className="dark-gray-back">
                 <Row>
                     <Col span={16} className="white-back margin-l-50 margin-t-50">
-                        <BlogList/>
+                        <BlogList search={this.props.location.search}/>
                     </Col>
                     <Col span={5} className="white-back margin-l-50 margin-t-50">
                         <div>标签和目录导航</div>
