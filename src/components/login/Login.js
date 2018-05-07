@@ -1,10 +1,10 @@
 import React from 'react'
 import {Button, Modal, Input, Tabs} from 'antd'
 import {getConfig} from '../../until/Tool'
-import LCAxios from '../../until/LoginCheckAxios'
 import axios from 'axios'
+import {withRouter} from "react-router-dom";
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -97,16 +97,20 @@ export default class Login extends React.Component {
                     this.setState({error_msg:response.data.msg});
 
                 }else{
+                    this.setState({
+                        visible: false,
+                    });
+                    //设置localStorage
+                    localStorage.setItem('uid',response.data.data.uid);
+                    localStorage.setItem('token',response.data.data.token);
                     //登陆成功后的回调
                     if(this.props.login_call_back){
                         this.props.login_call_back();
                     }
-                    //设置localStorage
-                    localStorage.setItem('uid',response.data.data.uid);
-                    localStorage.setItem('token',response.data.data.token);
-                    this.setState({
-                        visible: false,
-                    });
+                    //登陆成功后跳转页面
+                    if(this.props.login_redirect){
+                        this.props.history.push(this.props.login_redirect)
+                    }
                 }
             }
         ).catch();
@@ -121,8 +125,8 @@ export default class Login extends React.Component {
         if(this.state.acount.length <= 2 || this.state.acount.length >= 30){
             this.setState({error_msg:"账号必须在2到30个字符之间"});
             return false;
-        }else if(this.state.passwd.length <= 6 || this.state.passwd.length >= 18){
-            this.setState({error_msg:"密码必须在6~18个字符之间"})
+        }else if(this.state.passwd.length <= 2 || this.state.passwd.length >= 18){
+            this.setState({error_msg:"密码必须在2~18个字符之间"})
             return false;
         }else if(this.state.type == 2 && this.state.passwd != this.state.passwd_check){
             this.setState({error_msg:"两次密码输入不同，请检查"})
@@ -167,3 +171,4 @@ export default class Login extends React.Component {
         );
     }
 }
+export default withRouter(Login);
