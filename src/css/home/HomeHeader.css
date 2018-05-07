@@ -35,4 +35,5 @@
     color: white;
     background-color: rgb(50, 50, 50);
     border-bottom:solid 5px #14d5ff;
+    cursor:pointer;
 }

@@ -3,7 +3,6 @@ import BlogListItem from './BlogListItem'
 import axios from 'axios'
 import {Pagination} from 'antd'
 import {getConfig} from "../../until/Tool"
-import Page from '../page/Page'
 
 export default class BlogList extends React.Component {
     constructor() {

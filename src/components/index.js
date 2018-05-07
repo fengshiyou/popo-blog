@@ -6,7 +6,8 @@ import HomeBody from './home/HomeBody'
 import BlogBody from './blog/BlogBody'
 import Eidtor from './editor/Editor'
 import Test from './tags/TagsSelect'
-import Test2 from './catalog/CatalogSelect'
+import Test2 from './test/Test'
+import PrivateRoute from './route/PrivateRoute'
 import "../css/base/Body.css"
 
 export default class Index extends React.Component {
@@ -21,6 +22,7 @@ export default class Index extends React.Component {
                     <Route path="/" component={HomeFooter}/>
                     <Route path="/test" component={Test}/>
                     <Route path="/test2" component={Test2}/>
+                    <PrivateRoute path="/test3" component={Test2}/>
                 </div>
             </HashRouter>
         )
