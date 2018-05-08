@@ -1,7 +1,8 @@
 import React from 'react'
 import BlogListItem from './BlogListItem'
 import axios from 'axios'
-import {Pagination} from 'antd'
+import {Pagination,Button} from 'antd'
+import NeadLoginButton from '../login/NeadLoginButton'
 import {getConfig} from "../../until/Tool"
 
 export default class BlogList extends React.Component {
@@ -38,26 +39,33 @@ export default class BlogList extends React.Component {
         const blog_item_list = []
         axios.get(url).then(
             response => {
-                response.data.data.list.map(function (value, key, arr) {
-                    blog_item_list.push(<BlogListItem
-                        title={value.title}
-                        key={key}
-                        created_at={value.created_at}
-                        tags={value.tags}
-                        catalog={value.catalog}
-                        id={value.id}
-                    />)
-                })
+                const response_list = response.data.data.list;
+                if(response_list.length > 0){
+                    response_list.map(function (value, key, arr) {
+                        blog_item_list.push(<BlogListItem
+                            title={value.title}
+                            key={key}
+                            created_at={value.created_at}
+                            tags={value.tags}
+                            catalog={value.catalog}
+                            id={value.id}
+                        />)
+                    })
+                    const page = <Pagination showQuickJumper defaultCurrent={this.state.page_no} total={this.state.total} defaultPageSize={this.state.per_page} onChange={this.setPageNo} />
+                    //销毁一次组件  因为Pagination 挂载后不会再更新数据
+                    this.setState({page:null})
+                    this.setState({page})
+                }else{
+                    blog_item_list.push(<div key={0}>暂无数据</div>)
+                }
+
                 this.setState({blog_item_list})
                 this.setState({
                     total:response.data.data.total,
                     page_no:response.data.data.page_no,
                     per_page:response.data.data.per_page
                 })
-                const page = <Pagination showQuickJumper defaultCurrent={this.state.page_no} total={this.state.total} defaultPageSize={this.state.per_page} onChange={this.setPageNo} />
-                //销毁一次组件  因为Pagination 挂载后不会再更新数据
-                this.setState({page:null})
-                this.setState({page})
+
             }
         ).catch()
     }
@@ -66,6 +74,7 @@ export default class BlogList extends React.Component {
     render() {
         return (
             <div>
+                <NeadLoginButton className="margin-t-5 margin-l-5" component={Button} size="small" type="primary" context="写博客" icon="edit" link_to="/editor"/>
                 {this.state.blog_item_list}
                 {this.state.page}
             </div>

@@ -10,9 +10,9 @@ class Login extends React.Component {
         this.state = {
             visible: true,
             mask_closable: true,//是否可点击蒙板关闭对话框
-            acount:null,//账号
-            passwd:null,//密码
-            passwd_check:null,//密码确认
+            acount:"",//账号
+            passwd:"",//密码
+            passwd_check:"",//密码确认
             error_msg:null,//错误信息
             type:1 //类型 1登陆 2注册
         }

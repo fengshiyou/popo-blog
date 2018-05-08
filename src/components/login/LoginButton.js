@@ -2,8 +2,11 @@ import React from 'react'
 import Login from './Login'
 import {Link} from 'react-router-dom'
 
+/**
+ * 废弃
+ * 已经封装成 NeadLoginButton  高阶组件
+ */
 export default class LoginButton extends React.Component {
-    //@todo 有空封装成高阶组件
     constructor() {
         super();
         this.state = {visible: false};

@@ -36,6 +36,13 @@ body {
 .margin-t-50 {
     margin-top: 50px;
 }
+.margin-l-5 {
+    margin-left: 5px;
+}
+
+.margin-t-5 {
+    margin-top: 5px;
+}
 
 .white {
     color: white;
