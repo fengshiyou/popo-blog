@@ -1,15 +1,15 @@
 import React from 'react'
 import BlogListItem from './BlogListItem'
 import axios from 'axios'
-import {Pagination,Button} from 'antd'
+import {Pagination, Button} from 'antd'
 import NeadLoginButton from '../login/NeadLoginButton'
 import {getConfig} from "../../until/Tool"
 
 export default class BlogList extends React.Component {
     constructor() {
         super();
-        this.state = {blog_item_list: [], search: '', total: 1, page_no: 1,per_page:1,page:'',z:''}
-        this.setPageNo = (page_no)=> this._setPageNo(page_no)
+        this.state = {blog_item_list: [], search: '', total: 1, page_no: 1, per_page: 1, page: '', z: ''}
+        this.setPageNo = (page_no) => this._setPageNo(page_no)
     }
 
     //接收到新的参数的时候触发，传入新参数(变化过的参数)。旧参数还可以通过this.props获得
@@ -18,7 +18,7 @@ export default class BlogList extends React.Component {
         if (this.props.search == newProps.search) {
             return;
         }
-        this.setState({search: newProps.search,page_no:1}, this.setBlogItemList)
+        this.setState({search: newProps.search, page_no: 1}, this.setBlogItemList)
     }
 
     componentDidMount() {
@@ -40,8 +40,9 @@ export default class BlogList extends React.Component {
         axios.get(url).then(
             response => {
                 const response_list = response.data.data.list;
-                if(response_list.length > 0){
+                if (response_list.length > 0) {
                     response_list.map(function (value, key, arr) {
+                        const content = value.content ? value.content : "";
                         blog_item_list.push(<BlogListItem
                             title={value.title}
                             key={key}
@@ -49,21 +50,23 @@ export default class BlogList extends React.Component {
                             tags={value.tags}
                             catalog={value.catalog}
                             id={value.id}
+                            uid={value.uid}
+                            content_id={value.content_id}
                         />)
                     })
-                    const page = <Pagination showQuickJumper defaultCurrent={response.data.data.page_no} total={response.data.data.total} defaultPageSize={response.data.data.per_page} onChange={this.setPageNo} />
+                    const page = <Pagination showQuickJumper defaultCurrent={response.data.data.page_no} total={response.data.data.total} defaultPageSize={response.data.data.per_page} onChange={this.setPageNo}/>
                     //销毁一次组件  因为Pagination 挂载后不会再更新数据
-                    this.setState({page:null})
+                    this.setState({page: null})
                     this.setState({page})
-                }else{
+                } else {
                     blog_item_list.push(<div key={0}>暂无数据</div>)
                 }
 
                 this.setState({blog_item_list})
                 this.setState({
-                    total:response.data.data.total,
-                    page_no:response.data.data.page_no,
-                    per_page:response.data.data.per_page
+                    total: response.data.data.total,
+                    page_no: response.data.data.page_no,
+                    per_page: response.data.data.per_page
                 })
 
             }

@@ -7,8 +7,9 @@ export default ({component:Component,...rest}) => {
     let path = window.location.href.replace(window.location.origin,'');
     //去掉#
     path = path.replace("/#","");
-    //去掉?后面的内容
+    //去掉参数内容后面的内容
     path = path.split("?")[0];
+    rest.path = rest.path.split("/:")[0]
 
     if(localStorage.getItem('token')){//验证登陆
         return (

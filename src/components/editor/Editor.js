@@ -6,7 +6,7 @@ import TagsSelect from "../tags/TagsSelect"
 import CatalogSelect from "../catalog/CatalogSelect"
 import 'simplemde/debug/simplemde.css'
 import {Button, Input} from 'antd'
-import {getConfig} from '../../until/Tool'
+import {getConfig, getUrlParam} from '../../until/Tool'
 import LCAxios from '../../until/LoginCheckAxios'
 import axios from 'axios'
 import '../../css/editor/EditorButton.css'
@@ -47,21 +47,16 @@ export default class Editor extends React.Component {
         this.setState({catalog})
     }
 
-    componentDidMount() {
-        //@todo 如果有博客ID   则去获取博客信息  通过ajax或者props传递
-        //@todo  设置默认的文章信息
-        //@todo  如果没有博客ID  是新博客 则去获取default catalog 根目录
-    }
-
     _save() {
         const url = getConfig("request_save_blog");
+        const blog_id = getUrlParam('id');
         const post_params = {
-            'blog_id': false,//this.props.blog_id,
+            blog_id,//this.props.blog_id,
             'title': this.state.title,
             'tags': this.state.tags,
             'catalog_id': this.state.catalog,
             'content': this.state.smde.value()
-        }
+        };
         LCAxios({
             url,
             type: "post",
@@ -96,8 +91,28 @@ export default class Editor extends React.Component {
                     }
                 });
             },
-        })
-        this.setState({smde})
+        });
+        this.setState({smde});
+        const url = getConfig("request_get_edit_content");
+        const blog_id = getUrlParam('id');
+        if(blog_id){
+            LCAxios({
+                url,
+                type: "post",
+                post_params:{blog_id},
+                success: response => {
+                    if(response.data.code !== 200){
+                        alert(response.data.msg);
+                    }else{
+                        this.setState({title:response.data.data.title});
+                        this.state.smde.value(response.data.data.content);
+                    }
+                },
+                failSet: (login_node) => {
+                    this.setState({login: login_node})
+                },
+            });
+        }
     }
 
     render() {

@@ -38,7 +38,7 @@ function NeadLoginButtonWrapped({component: Component, ...args}) {
                     login = <Login visible={this.state.showLogin} close={this.modal_close} login_redirect={args.link_to}/>
                 }
                 return (
-                    <Component {...args} onClick={this.showlogin}> {args.context}{login}</Component>
+                    <Component {...args} onClick={this.showlogin}>{login}{args.context}</Component>
                 )
             }
 

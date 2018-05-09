@@ -19,8 +19,31 @@ export function getConfig(value) {
     //获取配置类型
     const type = getConfigKey(value);
     //引入配置文件
-    const type_config =  require("../config/" +type + ".config");
-    return type_config[dev +"_" + value]
+    const type_config = require("../config/" + type + ".config");
+    return type_config[dev + "_" + value]
 }
+
 //通过配置值获取配置类型   规范:配置值由 类型_值组成:request_blog_list 是request类型中的blog_list值
-const getConfigKey = (value)=> value.split("_")[0]
+const getConfigKey = (value) => value.split("_")[0]
+
+//获取路由参数
+export function getUrlParam(key) {
+    const params = getUrlParams();
+    return params[key];
+}
+
+//获取路由参数
+export function getUrlParams() {
+    let return_params = {};
+    let prams_str = window.location.href.replace(window.location.origin, '').split('?')[1];
+    if(prams_str){
+        prams_str = prams_str.split("&");
+        prams_str.map(function (value,key,arr) {
+            const info = value.split("=");
+            return_params[info[0]] = info[1];
+        });
+    }
+
+
+    return return_params;
+}

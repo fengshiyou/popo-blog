@@ -1,9 +1,10 @@
 import React from 'react'
 import "../../css/blog/BlogItem.css"
-import {Icon} from 'antd'
+import {Icon, Button} from 'antd'
 import {Link, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {mapStateToProps, getAllTags} from '../../action/tagsAction'
+import NeadLoginButton from '../login/NeadLoginButton'
 
 class BlogListItem extends React.Component {
     componentDidMount() {
@@ -43,6 +44,11 @@ class BlogListItem extends React.Component {
                 catalog_list.push(<Link to="/" key={key} className="blog-item-catalog white">{value[0]}</Link>)
             })
         }
+        //编辑按钮
+        let editor_button = '';
+        if (localStorage.getItem('uid') == this.props.uid) {
+            editor_button = <NeadLoginButton className="margin-t-5 margin-l-5" component={Button} size="small" context="编辑" icon="edit" link_to={"/editor?id=" + this.props.id}/>
+        }
         return (
             <div className="blog-item">
                 <div className="blog-item-title">
@@ -64,9 +70,7 @@ class BlogListItem extends React.Component {
                     {tag_list}
                     </span>
                 </div>
-                <p>
-                    最近一个活动页面中有一个小需求，用户点击或者长按就可以复制内容到剪贴板，
-                </p>
+                {editor_button}
             </div>
 
         )
