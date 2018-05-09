@@ -7,6 +7,7 @@ import CatalogSelect from "../catalog/CatalogSelect"
 import 'simplemde/debug/simplemde.css'
 import {Button, Input} from 'antd'
 import {getConfig} from '../../until/Tool'
+import LCAxios from '../../until/LoginCheckAxios'
 import axios from 'axios'
 import '../../css/editor/EditorButton.css'
 import '../../css/editor/Preview.css'
@@ -16,8 +17,15 @@ import '../../css/editor/Editor.css'
 export default class Editor extends React.Component {
     constructor() {
         super();
-        this.state = {smde: null, title: "请在这里输入标题", tags: null, catalog: null};
+        this.state = {
+            smde: null,
+            title: "请在这里输入标题",
+            tags: null,
+            catalog: null,
+            login: null,
+        };
         this.save = () => this._save();
+        this.back = () => this._back();
         this.setTitle = (e) => this._setTitle(e);
         this.setTags = (tags) => this._setTags(tags);
         this.setCatalog = (catalog) => this._setCatalog(catalog);
@@ -27,6 +35,10 @@ export default class Editor extends React.Component {
         this.setState({title: e.target.value});
     }
 
+    _back() {
+        history.go(-1);
+    }
+
     _setTags(tags) {
         this.setState({tags})
     }
@@ -34,25 +46,32 @@ export default class Editor extends React.Component {
     _setCatalog(catalog) {
         this.setState({catalog})
     }
-    componentDidMount(){
+
+    componentDidMount() {
         //@todo 如果有博客ID   则去获取博客信息  通过ajax或者props传递
         //@todo  设置默认的文章信息
         //@todo  如果没有博客ID  是新博客 则去获取default catalog 根目录
     }
+
     _save() {
-        axios.post(
-            getConfig("request_save_blog"),
-            {
-                'blog_id': false,//this.props.blog_id,
-                'title': this.state.title,
-                'tags': this.state.tags,
-                'catalog_id': this.state.catalog,
-                'content': this.state.smde.value()
-            }
-        ).then(
-            response => {
-            }
-        ).catch(e => console.log(e))
+        const url = getConfig("request_save_blog");
+        const post_params = {
+            'blog_id': false,//this.props.blog_id,
+            'title': this.state.title,
+            'tags': this.state.tags,
+            'catalog_id': this.state.catalog,
+            'content': this.state.smde.value()
+        }
+        LCAxios({
+            url,
+            type: "post",
+            post_params,
+            success: response => {
+            },
+            failSet: (login_node) => {
+                this.setState({login: login_node})
+            },
+        });
     }
 
     componentDidMount() {
@@ -87,10 +106,6 @@ export default class Editor extends React.Component {
                 <div className="editor-title">
                     <Input placeholder={this.state.title} size="large" onChange={this.setTitle}/>
                 </div>
-                <TagsSelect
-                    setTags={this.setTags}
-                    defaultValue={[1]}//这个值从后台博客信息中获取   如果是新增博客  则为空
-                />
                 <div className="margin-t-50">
                     <span>选择目录：</span>
                     <CatalogSelect
@@ -98,11 +113,22 @@ export default class Editor extends React.Component {
                         defaultValue={[1]} //这个值从后台博客信息中获取   如果是新增博客  则获取根目录
                     />
                 </div>
+                <div className="margin-t-50">
+                    <span>选择标签：</span>
+                    <TagsSelect
+                        setTags={this.setTags}
+                        defaultValue={[1]}//这个值从后台博客信息中获取   如果是新增博客  则为空
+                    />
+                </div>
 
                 <div className="margin-t-50">
                     <textarea id="editor"/>
                 </div>
-                <Button onClick={this.save} type="primary">保存</Button>
+                <div className="text-center">
+                    <Button className="margin-b-15" onClick={this.save} type="primary" size="large">保存</Button>
+                    <Button className="margin-l-50 margin-b-15" onClick={this.back} type="primary" size="large">返回</Button>
+                </div>
+                {this.state.login}
             </div>
         )
     }

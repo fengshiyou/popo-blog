@@ -43,7 +43,9 @@ body {
 .margin-t-5 {
     margin-top: 5px;
 }
-
+.margin-b-15 {
+    margin-bottom: 15px;
+}
 .white {
     color: white;
 }

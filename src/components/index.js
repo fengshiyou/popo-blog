@@ -19,7 +19,7 @@ export default class Index extends React.Component {
                     <Route exact path="/" component={HomeBody}/>
                     <Route path="/blog" component={BlogBody}/>
                     <PrivateRoute path="/myblog" component={BlogBody}/>
-                    <Route path="/editor" component={Eidtor}/>
+                    <PrivateRoute path="/editor" component={Eidtor}/>
                     <Route path="/" component={HomeFooter}/>
                     <Route path="/test" component={Test}/>
                     <Route path="/test2" component={Test2}/>

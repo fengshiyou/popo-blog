@@ -32,8 +32,6 @@ class TagsSelect extends React.Component {
     render() {
         const select_tags = this.formateTags(this.props.items);
         return (
-            <div className="margin-t-50">
-                <span>选择标签：</span>
                 <Select
                     mode='multiple'
                     style={{width: '80%'}}
@@ -43,7 +41,6 @@ class TagsSelect extends React.Component {
                 >
                     {select_tags}
                 </Select>
-            </div>
         )
     }
 }

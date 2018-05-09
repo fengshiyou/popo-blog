@@ -51,7 +51,7 @@ export default class BlogList extends React.Component {
                             id={value.id}
                         />)
                     })
-                    const page = <Pagination showQuickJumper defaultCurrent={this.state.page_no} total={this.state.total} defaultPageSize={this.state.per_page} onChange={this.setPageNo} />
+                    const page = <Pagination showQuickJumper defaultCurrent={response.data.data.page_no} total={response.data.data.total} defaultPageSize={response.data.data.per_page} onChange={this.setPageNo} />
                     //销毁一次组件  因为Pagination 挂载后不会再更新数据
                     this.setState({page:null})
                     this.setState({page})
