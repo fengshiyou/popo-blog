@@ -11,6 +11,7 @@ export default class CatalogEditDialog extends React.Component {
             visible: false,
             dialog_info: null,
             login: null,
+            new_name:null,
         };
         //对话框关闭
         this.close = () => this._close();
@@ -29,8 +30,14 @@ export default class CatalogEditDialog extends React.Component {
                 LCAxios({
                     url,
                     type: "post",
-                    post_params: {},
+                    post_params: {
+                        catalog_id:this.props.catalog_id,
+                        new_name:this.state.new_name,
+                    },
                     success: response => {
+                        if(response.data.code !== 200){
+                            alert(response.data.msg);
+                        }
                     },
                     failSet: (login_node) => {
                         this.setState({login: login_node})
@@ -66,7 +73,7 @@ export default class CatalogEditDialog extends React.Component {
         switch (this.props.type) {
             //目录重命名
             case "rename":
-                dialog_info = (<Input placeholder="请输入新的目录名称"/>);
+                dialog_info = (<Input placeholder="请输入新的目录名称" onChange={(e)=>{this.setState({new_name:e.target.value})}} />);
                 title = "修改“" + this.props.catalog_name + "”目录名称";
                 break;
         }
