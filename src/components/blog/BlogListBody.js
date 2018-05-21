@@ -1,8 +1,10 @@
 import React from 'react'
 import BlogList from './BlogList'
+
 import {Row, Col} from 'antd'
 import {Provider} from 'react-redux'
 import {getHeightByRadio} from '../../until/Tool'
+import BlogLIstRightMenu from "./BlogLIstRightMenu";
 
 export default class BlogListBody extends React.Component {
     render() {
@@ -20,7 +22,7 @@ export default class BlogListBody extends React.Component {
                         <BlogList search={search}/>
                     </Col>
                     <Col span={5} className="white-back margin-l-50 margin-t-50">
-                        <div>标签和目录导航</div>
+                        <BlogLIstRightMenu />
                     </Col>
                 </Row>
             </div>

@@ -6,6 +6,7 @@ import {getAllTags, mapStateToProps} from "../../action/tagsAction";
 class TagsSelect extends React.Component {
     constructor() {
         super();
+        this.state={defaultValue:[]}
         this.formateTags = (tags) => this._formateTags(tags)
         this.onChange = (tags) => this._onChange(tags)
     }
@@ -36,7 +37,7 @@ class TagsSelect extends React.Component {
                     mode='multiple'
                     style={{width: '80%'}}
                     placeholder="请选择标签"
-                    defaultValue={1}
+                    defaultValue={this.props.defaultValue}
                     onChange={this.onChange}
                 >
                     {select_tags}

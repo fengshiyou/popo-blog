@@ -49,7 +49,7 @@ class CatalogSelect extends React.Component {
         //格式化数据并且赋值给this.state.catalog_list
         let catalog_list = this.formatCatalogList(this.props.items);
         return (
-            <Cascader options={catalog_list} onChange={this.onChang} changeOnSelect/>
+            <Cascader options={catalog_list} onChange={this.onChang} changeOnSelect defaultValue={[this.props.defaultValue]}/>
         )
     }
 }

@@ -25,7 +25,7 @@ class BlogListItem extends React.Component {
                 //标签背景色
                 const back_ground_color = {backgroundColor: this.props.items[value].color}
                 //组装标签
-                tag_list.push(<Link to="/" className="white" key={key} style={back_ground_color}>{this.props.items[value].name}</Link>);
+                tag_list.push(<Link to="/" className="white margin-l-5 padding-0-5" key={key} style={back_ground_color}>{this.props.items[value].name}</Link>);
             });
         }
         const created_at = this.props.created_at.split('T')[0];
@@ -66,7 +66,7 @@ class BlogListItem extends React.Component {
                 </div>
                 <div className="blog-item-tag inline">
                     <Icon type="tag-o"/>
-                    <span className="blog-item-content">
+                    <span>
                     {tag_list}
                     </span>
                 </div>

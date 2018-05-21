@@ -20,8 +20,9 @@ export default class Editor extends React.Component {
         this.state = {
             smde: null,
             title: "请在这里输入标题",
-            tags: null,
-            catalog: null,
+            select_tags: null,
+            select_catalog:null,
+            catalog_id: null,
             login: null,
         };
         this.save = () => this._save();
@@ -43,8 +44,9 @@ export default class Editor extends React.Component {
         this.setState({tags})
     }
 
-    _setCatalog(catalog) {
-        this.setState({catalog})
+    _setCatalog(catalog_id) {
+        console.log(catalog_id)
+        this.setState({catalog_id})
     }
 
     _save() {
@@ -54,7 +56,7 @@ export default class Editor extends React.Component {
             blog_id,//this.props.blog_id,
             'title': this.state.title,
             'tags': this.state.tags,
-            'catalog_id': this.state.catalog,
+            'catalog_id': this.state.catalog_id,
             'content': this.state.smde.value()
         };
         LCAxios({
@@ -95,22 +97,81 @@ export default class Editor extends React.Component {
         this.setState({smde});
         const url = getConfig("request_get_edit_content");
         const blog_id = getUrlParam('id');
-        if(blog_id){
+        if (blog_id) {
             LCAxios({
                 url,
                 type: "post",
-                post_params:{blog_id},
+                post_params: {blog_id},
                 success: response => {
-                    if(response.data.code !== 200){
+                    if (response.data.code !== 200) {
                         alert(response.data.msg);
-                    }else{
-                        this.setState({title:response.data.data.title});
+                    } else {
+                        //需要把数字转换成字符串 插件要求的  但是又不能传入 [""]
+                        let default_tags = []
+                        if(response.data.data.tags){
+                            default_tags = response.data.data.tags.split(",").map(function (value) {
+                                return String(value);
+                            });
+                        }
+                        //设置标签node   因为antd挂载之后不会更新  所以在这里设置
+                        const select_tags = (
+                            <div className="margin-t-50">
+                                <span>选择标签：</span>
+                                <TagsSelect
+                                    setTags={this.setTags}
+                                    defaultValue={default_tags}//这个值从后台博客信息中获取   如果是新增博客  则为空
+                                />
+                            </div>
+                        );
+                        //获取当前目录  catalog:"郑州|1|-1,荥阳|19|1,荥阳东|20|19"
+                        const default_catalog = response.data.data.catalog.split(",").map(function(value){
+                           return parseInt(value.split("|")[1]);
+                        });
+                        //设置目录node   因为antd挂载之后不会更新  所以在这里设置  catalog:"郑州|1|-1,荥阳|19|1,荥阳东|20|19"
+                        const select_catalog = (
+                            <div className="margin-t-50">
+                                <span>选择目录：</span>
+                                <CatalogSelect
+                                    onChange={this.setCatalog}
+                                    defaultValue={default_catalog} //这个值从后台博客信息中获取   如果是新增博客  则获取根目录
+                                />
+                            </div>
+                        );
+                        this.setState({
+                            title: response.data.data.title,
+                            select_tags,
+                            select_catalog,
+                            tags:response.data.data.tags,
+                            catalog_id:response.data.data.catalog_id,
+                        });
                         this.state.smde.value(response.data.data.content);
                     }
                 },
                 failSet: (login_node) => {
                     this.setState({login: login_node})
                 },
+            });
+        }else{
+            const select_tags = (
+                <div className="margin-t-50">
+                    <span>选择标签：</span>
+                    <TagsSelect
+                        setTags={this.setTags}
+                    />
+                </div>
+            );
+            //设置目录node   因为antd挂载之后不会更新  所以在这里设置  catalog:"郑州|1|-1,荥阳|19|1,荥阳东|20|19"
+            const select_catalog = (
+                <div className="margin-t-50">
+                    <span>选择目录：</span>
+                    <CatalogSelect
+                        onChange={this.setCatalog}
+                    />
+                </div>
+            );
+            this.setState({
+                select_tags,
+                select_catalog,
             });
         }
     }
@@ -121,21 +182,8 @@ export default class Editor extends React.Component {
                 <div className="editor-title">
                     <Input placeholder={this.state.title} size="large" onChange={this.setTitle}/>
                 </div>
-                <div className="margin-t-50">
-                    <span>选择目录：</span>
-                    <CatalogSelect
-                        onChange={this.setCatalog}
-                        defaultValue={[1]} //这个值从后台博客信息中获取   如果是新增博客  则获取根目录
-                    />
-                </div>
-                <div className="margin-t-50">
-                    <span>选择标签：</span>
-                    <TagsSelect
-                        setTags={this.setTags}
-                        defaultValue={[1]}//这个值从后台博客信息中获取   如果是新增博客  则为空
-                    />
-                </div>
-
+                {this.state.select_catalog}
+                {this.state.select_tags}
                 <div className="margin-t-50">
                     <textarea id="editor"/>
                 </div>

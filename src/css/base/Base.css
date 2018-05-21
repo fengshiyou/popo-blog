@@ -46,6 +46,9 @@ body {
 .margin-b-15 {
     margin-bottom: 15px;
 }
+.padding-0-5{
+    padding: 0 5px;
+}
 .white {
     color: white;
 }

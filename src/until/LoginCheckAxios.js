@@ -8,7 +8,7 @@ export default function loginCheckAxios({...params}) {
     post_params.token = localStorage.getItem('token');
     axios[type](url, post_params).then(
         response => {
-            if (response.data.code !== 1 || response.data.code !== 2) {
+            if (response.data.code !== 1 && response.data.code !== 2) {
                 success(response);
             } else {
                 if (response.data.code === 1) {//需要登陆
