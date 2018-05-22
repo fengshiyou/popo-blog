@@ -5,9 +5,13 @@ import {getConfig} from '../until/Tool'
 function fetch() {
     return dispatch => {
         //请求中的dispatch
-        dispatch({type:"REQUEST_CATALOGLIST"})
-        const url = getConfig("request_get_catalog");
-        axios.get(url).then(
+        dispatch({type: "REQUEST_CATALOGLIST"})
+        const url = getConfig("request_get_my_catalog");
+        let post_params = {}
+        post_params.login_uid = localStorage.getItem('uid');
+        post_params.token = localStorage.getItem('token');
+
+        axios.post(url, post_params).then(
             response => {
                 dispatch({type: "SERVER_CATALOGLIST", items: response.data.data})
             }
@@ -26,6 +30,12 @@ function shouldFetch(state) {
     //如果有数据 判断catalog_list
     return !state.catalogReducer.items.length
 }
+//强制更新数据
+export function initMyCatalog() {
+    return (dispatch) => {
+        return dispatch(fetch())
+    }
+}
 
 export function getMyCatalog() {
     return (dispatch, getState) => {
@@ -42,7 +52,7 @@ export function catalogReducer(state = {catalog_fetching: false, items: []}, act
         case "SERVER_CATALOGLIST":
             return Object.assign({}, state, {catalog_fetching: false, items: action.items})
         case "REQUEST_CATALOGLIST":
-            return Object.assign({}, state, {catalog_fetching:true})
+            return Object.assign({}, state, {catalog_fetching: true})
         default:
             return state
     }

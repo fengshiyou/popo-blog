@@ -9,10 +9,15 @@ import BlogLIstRightMenu from "./BlogLIstRightMenu";
 export default class BlogListBody extends React.Component {
     render() {
         let search = '';
-        if(this.props.location.pathname == '/myblog'){//我的博客
+        let right_menu_type = 1 ;//1:个人博客(显示个人目录) 2:他人博客(显示他人目录) 3:博客大厅(显示tags)
+        if(this.props.location.pathname == '/myblog'){//个人博客
             search = "?uid=" + localStorage.getItem('uid');
-        }else{//查询博客
+        }else if(this.props.match.params.uid){//查询他人博客
+            search = "?uid=" + this.props.match.params.uid;
+            right_menu_type = 2;
+        }else{//博客大厅
             search = this.props.location.search;
+            right_menu_type = 3;
         }
 
         return (
@@ -22,7 +27,7 @@ export default class BlogListBody extends React.Component {
                         <BlogList search={search}/>
                     </Col>
                     <Col span={5} className="white-back margin-l-50 margin-t-50">
-                        <BlogLIstRightMenu />
+                        <BlogLIstRightMenu menu_type={right_menu_type} uid={this.props.match.params.uid}/>
                     </Col>
                 </Row>
             </div>

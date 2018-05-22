@@ -4,7 +4,7 @@ import CatalogMenu from '../catalog/CatalogMenu'
 export default class BlogLIstRightMenu extends React.Component {
     render(){
         return (
-            <CatalogMenu />
+            <CatalogMenu menu_type={this.props.menu_type} uid={this.props.uid}/>
         )
     }
 }
