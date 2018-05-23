@@ -17,6 +17,9 @@ class BlogListItem extends React.Component {
     render() {
         //定义标签dom列表
         let tag_list = [];
+        //列表类型
+        const list_type = this.props.list_type;//1:个人博客 2:他人博客 3:博客大厅   只有个人博客link特殊
+        const uid = this.props.uid;
         //如果有全局标签
         if (this.props.items.length) {
             //标签转数组 1，2，3 转 [1,2,3]  如果没有传tags 则空
@@ -32,21 +35,25 @@ class BlogListItem extends React.Component {
         //@todo 目录的背景色？
         const category_back_ground_color = {backgroundColor: "#a07575"};
         //组装文章目录
-        const catalog_list = []
+        const catalog_list = [];
         if (this.props.catalog) {
             const new_catalog = [];
             const catalog_arr = this.props.catalog.split(",");
             catalog_arr.map(function (value, key, arr) {
                 const catalog_info = value.split("|");
                 new_catalog[catalog_info[1]] = catalog_info
-            })
+            });
             new_catalog.map(function (value, key, arr) {
-                catalog_list.push(<Link to="/" key={key} className="blog-item-catalog white">{value[0]}</Link>)
+                if (list_type == 1) {
+                    catalog_list.push(<Link to={"/myblog?catalog_id=" + value[1]} key={key} className="blog-item-catalog white">{value[0]}</Link>)
+                }else{
+                    catalog_list.push(<Link to={"/blog/" + uid +"?catalog_id=" + value[1]} key={key} className="blog-item-catalog white">{value[0]}</Link>)
+                }
             })
         }
         //编辑按钮
         let editor_button = '';
-        if (localStorage.getItem('uid') == this.props.uid) {
+        if (localStorage.getItem('uid') == uid) {
             editor_button = <NeadLoginButton className="margin-t-5 margin-l-5" component={Button} size="small" context="编辑" icon="edit" link_to={"/editor?id=" + this.props.id}/>
         }
         return (

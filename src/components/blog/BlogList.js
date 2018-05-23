@@ -36,10 +36,11 @@ export default class BlogList extends React.Component {
         } else {
             url += "?page_no=" + this.state.page_no;
         }
-        const blog_item_list = []
+        const blog_item_list = [];
         axios.get(url).then(
             response => {
                 const response_list = response.data.data.list;
+                const list_type = this.props.list_type;
                 if (response_list.length > 0) {
                     response_list.map(function (value, key, arr) {
                         const content = value.content ? value.content : "";
@@ -49,16 +50,19 @@ export default class BlogList extends React.Component {
                             created_at={value.created_at}
                             tags={value.tags}
                             catalog={value.catalog}
+                            catalog_id={value.catalog_id}
                             id={value.id}
                             uid={value.uid}
+                            list_type={list_type}
                             content_id={value.content_id}
                         />)
-                    })
+                    });
                     const page = <Pagination showQuickJumper defaultCurrent={response.data.data.page_no} total={response.data.data.total} defaultPageSize={response.data.data.per_page} onChange={this.setPageNo}/>
                     //销毁一次组件  因为Pagination 挂载后不会再更新数据
                     this.setState({page: null})
                     this.setState({page})
                 } else {
+                    this.setState({page: null})
                     blog_item_list.push(<div key={0}>暂无数据</div>)
                 }
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import {Button, Modal, Tooltip} from 'antd'//导入插件
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import CatalogEditDialog from './CatalogEditDialog'
@@ -16,7 +17,7 @@ class CatalogMenu extends React.Component {
             edit_button_opacity: {//透明度
                 opacity: 0
             },
-            list: [] ,//列表   查看他人博客的时候使用
+            list: [],//列表   查看他人博客的时候使用
         };
         //格式化catalog_menu
         this.formatCatalogMenu = (catalog_list) => this._formatCatalogMenu(catalog_list);
@@ -103,12 +104,13 @@ class CatalogMenu extends React.Component {
         let result_catalog_menu = [];
         for (let i = 0; i < catalog_list.length; i++) {
             const id = catalog_list[i].id;
-            const name = catalog_list[i].catalog_name;
+            //目录的名称，后面会进行拼装，根据是个人目录还是他人目录拼装超链接
+            let name = catalog_list[i].catalog_name;
             let button_group = '';
             if (this.props.menu_type == 1) {//1:个人博客(显示个人目录和功能按钮) 2:他人博客(显示他人目录)
                 let edit_button = '';
                 let del_button = '';
-                if( catalog_list[i].parent_id != -1){//根目录不允许删除和改名
+                if (catalog_list[i].parent_id != -1) {//根目录不允许删除和改名
                     edit_button = (
                         <Tooltip title="修改名称" mouseEnterDelay={0.7}>
                             <Button
@@ -146,13 +148,17 @@ class CatalogMenu extends React.Component {
                             size="small"/>
                     </Tooltip>
                 );
+                //个人博客才需要有管理目录的button
                 button_group = (
-                <span onMouseOver={(e) => this.setEditButtonOp(e, id, 0.9)} onMouseLeave={(e) => this.setEditButtonOp(e, id, 0)}>
-                    {edit_button}
-                    {add_button}
-                    {del_button}
-                </span>
+                    <span onMouseOver={(e) => this.setEditButtonOp(e, id, 0.9)} onMouseLeave={(e) => this.setEditButtonOp(e, id, 0)}>
+                        {edit_button}
+                        {add_button}
+                        {del_button}
+                    </span>
                 );
+                name = <Link to={"/myblog?catalog_id=" + id}>{name}</Link>;
+            } else {
+                name = <Link to={"/blog/" + this.props.uid + "?catalog_id=" + id}>{name}</Link>;
             }
 
             if (catalog_list[i].next.length > 0) {//如果有子目录
@@ -191,8 +197,31 @@ class CatalogMenu extends React.Component {
 
     render() {
         let catalog_list = this.getCatalogList();
+        let menu_title = '';
+        if (this.props.menu_type == 1) {//1:个人博客(显示个人目录和功能按钮) 2:他人博客(显示他人目录)
+            menu_title = (
+                <div className="text-center">
+                    <h1>
+                        目录
+                    </h1>
+                    <span>可对目录进行操作：增加/删除/命名</span>
+                    <hr/>
+                </div>
+            )
+        } else if (this.props.menu_type == 2) {
+            menu_title = (
+                <div className="text-center">
+                    <h1>
+                        目录
+                    </h1>
+                    <span>可点击目录进行查询</span>
+                    <hr/>
+                </div>
+            )
+        }
         return (
             <div>
+                {menu_title}
                 {catalog_list}
                 {this.state.edit_modal}
             </div>

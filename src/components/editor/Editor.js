@@ -45,7 +45,6 @@ export default class Editor extends React.Component {
     }
 
     _setCatalog(catalog_id) {
-        console.log(catalog_id)
         this.setState({catalog_id})
     }
 
