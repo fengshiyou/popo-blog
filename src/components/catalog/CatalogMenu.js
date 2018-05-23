@@ -107,7 +107,8 @@ class CatalogMenu extends React.Component {
             let button_group = '';
             if (this.props.menu_type == 1) {//1:个人博客(显示个人目录和功能按钮) 2:他人博客(显示他人目录)
                 let edit_button = '';
-                if( catalog_list[i].parent_id != -1){
+                let del_button = '';
+                if( catalog_list[i].parent_id != -1){//根目录不允许删除和改名
                     edit_button = (
                         <Tooltip title="修改名称" mouseEnterDelay={0.7}>
                             <Button
@@ -117,6 +118,18 @@ class CatalogMenu extends React.Component {
                                 type='primary'
                                 icon="edit"
                                 onClick={() => this.showEditModal('rename', name, id)}
+                                size="small"/>
+                        </Tooltip>
+                    );
+                    del_button = (
+                        <Tooltip title="删除该目录" mouseEnterDelay={0.4}>
+                            <Button
+                                className={`margin-l-5 ${'button_group' + id}`}
+                                style={this.state.edit_button_opacity}
+                                ghost
+                                type='primary'
+                                icon="minus-circle"
+                                onClick={() => this.showEditModal('del', name, id)}
                                 size="small"/>
                         </Tooltip>
                     );
@@ -130,18 +143,6 @@ class CatalogMenu extends React.Component {
                             type='primary'
                             icon="plus-circle"
                             onClick={() => this.showEditModal('add', name, id)}
-                            size="small"/>
-                    </Tooltip>
-                );
-                const del_button = (
-                    <Tooltip title="删除该目录" mouseEnterDelay={0.4}>
-                        <Button
-                            className={`margin-l-5 ${'button_group' + id}`}
-                            style={this.state.edit_button_opacity}
-                            ghost
-                            type='primary'
-                            icon="minus-circle"
-                            onClick={() => this.showEditModal('del', name, id)}
                             size="small"/>
                     </Tooltip>
                 );
