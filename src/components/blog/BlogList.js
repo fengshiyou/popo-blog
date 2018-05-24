@@ -54,6 +54,7 @@ export default class BlogList extends React.Component {
                             id={value.id}
                             uid={value.uid}
                             list_type={list_type}
+                            acount={value.acount}
                             content_id={value.content_id}
                         />)
                     });
@@ -71,8 +72,9 @@ export default class BlogList extends React.Component {
                     total: response.data.data.total,
                     page_no: response.data.data.page_no,
                     per_page: response.data.data.per_page
-                })
-
+                });
+                //回到顶部
+                window.scrollTo(0,0);
             }
         ).catch()
     }

@@ -65,6 +65,12 @@ class BlogListItem extends React.Component {
                 <div className="blog-item-title">
                     <Link className="black" to={`/blog/article/${this.props.id}`}>{this.props.title}</Link>
                 </div>
+                <div>
+                    <Link className="black" to={'/blog/' + this.props.uid}>
+                        <Icon type="user"/>
+                        {this.props.acount}
+                    </Link>
+                </div>
                 <div className="blog-item-tag inline">
                     <Icon type="calendar"/>
                     <span className="gray-back blog-item-content">{created_at}</span>
