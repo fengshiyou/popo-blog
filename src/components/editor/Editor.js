@@ -12,6 +12,7 @@ import axios from 'axios'
 import '../../css/editor/EditorButton.css'
 import '../../css/editor/Preview.css'
 import '../../css/editor/Editor.css'
+import BlogSaveDialog from "./BlogSaveDialog";
 
 
 export default class Editor extends React.Component {
@@ -24,6 +25,7 @@ export default class Editor extends React.Component {
             select_catalog:null,
             catalog_id: null,
             login: null,
+            save_success_dialog:null,
         };
         this.save = () => this._save();
         this.back = () => this._back();
@@ -63,6 +65,12 @@ export default class Editor extends React.Component {
             type: "post",
             post_params,
             success: response => {
+                if(response.data.code == 200){//保存成功
+                    const save_success_dialog = <BlogSaveDialog afterClose={()=>{this.setState({save_success_dialog:null})}} visable={true} id={response.data.data.id}/>
+                    this.setState({save_success_dialog})
+                }else{//保存失败
+                    alert(response.data.msg);
+                }
             },
             failSet: (login_node) => {
                 this.setState({login: login_node})
@@ -140,7 +148,7 @@ export default class Editor extends React.Component {
                             title: response.data.data.title,
                             select_tags,
                             select_catalog,
-                            tags:response.data.data.tags,
+                            tags:response.data.data.tags.split(','),
                             catalog_id:response.data.data.catalog_id,
                         });
                         this.state.smde.value(response.data.data.content);
@@ -191,6 +199,7 @@ export default class Editor extends React.Component {
                     <Button className="margin-l-50 margin-b-15" onClick={this.back} type="primary" size="large">返回</Button>
                 </div>
                 {this.state.login}
+                {this.state.save_success_dialog}
             </div>
         )
     }
