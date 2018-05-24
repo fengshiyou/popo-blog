@@ -28,7 +28,11 @@ class BlogListItem extends React.Component {
                 //标签背景色
                 const back_ground_color = {backgroundColor: this.props.items[value].color}
                 //组装标签
-                tag_list.push(<Link to="/" className="white margin-l-5 padding-0-5" key={key} style={back_ground_color}>{this.props.items[value].name}</Link>);
+                if (list_type == 1) {
+                    tag_list.push(<Link to={"/myblog?tag_id=" + value} className="white margin-l-5 padding-0-5" key={key} style={back_ground_color}>{this.props.items[value].name}</Link>);
+                }else{
+                    tag_list.push(<Link to={"/blog?tag_id=" + value} className="white margin-l-5 padding-0-5" key={key} style={back_ground_color}>{this.props.items[value].name}</Link>);
+                }
             });
         }
         const created_at = this.props.created_at.split('T')[0];

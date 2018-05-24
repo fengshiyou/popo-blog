@@ -106,7 +106,10 @@ class CatalogMenu extends React.Component {
             const id = catalog_list[i].id;
             //目录的名称，后面会进行拼装，根据是个人目录还是他人目录拼装超链接
             let name = catalog_list[i].catalog_name;
+            //功能按钮组
             let button_group = '';
+            //目录title
+            let menu_title = '';
             if (this.props.menu_type == 1) {//1:个人博客(显示个人目录和功能按钮) 2:他人博客(显示他人目录)
                 let edit_button = '';
                 let del_button = '';
@@ -202,17 +205,19 @@ class CatalogMenu extends React.Component {
             menu_title = (
                 <div className="text-center">
                     <h1>
-                        目录
+                        目录管理
                     </h1>
                     <span>可对目录进行操作：增加/删除/命名</span>
                     <hr/>
                 </div>
             )
         } else if (this.props.menu_type == 2) {
+            //根目录就是用户名
+            const user_name = this.state.list.length > 0 ? this.state.list[0].catalog_name : "";
             menu_title = (
                 <div className="text-center">
                     <h1>
-                        目录
+                        用户{user_name}的目录
                     </h1>
                     <span>可点击目录进行查询</span>
                     <hr/>
