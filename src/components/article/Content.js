@@ -1,6 +1,7 @@
 import React from 'react'
 import Marked from 'marked'
 import HighLight from 'highlight.js'
+import Message from '../message/Message'
 import "../../css/content/Content.css"
 
 
@@ -10,7 +11,7 @@ export default class Content extends React.Component {
         //重写 Renderer.prototype.heading 方法   添加锚点ID  因为中文内容不会生成ID
         renderer.heading = (text, level, raw) => {
             return '<h' + level + ' id="' + text + '">' + text + '</h' + level + '>\n'
-        }
+        };
         //原来的renderer 方法
         // Renderer.prototype.heading = function(text, level, raw) {
         //     return '<h'
@@ -40,6 +41,8 @@ export default class Content extends React.Component {
                     {this.props.created_at}
                 </div>
                 <div className="content-detail" dangerouslySetInnerHTML={{__html: Marked(this.props.content)}}></div>
+                <hr/>
+                <Message message_type="blog" status_type="add" id={this.props.id}/>
             </div>
         )
     }

@@ -20,7 +20,7 @@ export default class BlogArticle extends React.Component {
             url,{content_id}
         ).then(
             response => {
-                this.setState({content: <Content content={response.data.data.content} title={response.data.data.title} created_at={response.data.data.created_at}/>})
+                this.setState({content: <Content id={content_id} content={response.data.data.content} title={response.data.data.title} created_at={response.data.data.created_at}/>})
                 this.setState({menu_list: this.getMenuList(response.data.data.content)})
             }
         ).catch(e => console.log(e))

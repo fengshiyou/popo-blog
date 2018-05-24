@@ -11,3 +11,4 @@ export const local_request_del_catalog =  "http://192.168.150.147:8090/api/blog/
 export const local_request_test =  "http://192.168.150.147:8090/api/request/test"
 export const local_request_login =  "http://192.168.150.147:8090/api/user/login"
 export const local_request_register =  "http://192.168.150.147:8090/api/user/register"
+export const local_request_message =  "http://192.168.150.147:8090/api/user/register"
