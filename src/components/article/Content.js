@@ -1,11 +1,17 @@
 import React from 'react'
 import Marked from 'marked'
 import HighLight from 'highlight.js'
-import Message from '../message/Message'
+import Comment from '../comment/Comment'
 import "../../css/content/Content.css"
 
 
 export default class Content extends React.Component {
+    constructor() {
+        super();
+        //重置留言列表
+        // this.newMessage = (content) => this._newMessage(content);
+    }
+
     componentWillMount() {
         const renderer = new Marked.Renderer();
         //重写 Renderer.prototype.heading 方法   添加锚点ID  因为中文内容不会生成ID
@@ -30,6 +36,10 @@ export default class Content extends React.Component {
             highlight: code => HighLight.highlightAuto(code).value,
         })
     }
+    _newMessage(content){
+        //调用子类 message_list 重置功能
+        this.refs.message_list.newMessage(content)
+    }
 
     render() {
         return (
@@ -42,7 +52,7 @@ export default class Content extends React.Component {
                 </div>
                 <div className="content-detail" dangerouslySetInnerHTML={{__html: Marked(this.props.content)}}></div>
                 <hr/>
-                <Message message_type="blog" status_type="add" id={this.props.id}/>
+                <Comment comment_type="blog" id={this.props.id}/>
             </div>
         )
     }
