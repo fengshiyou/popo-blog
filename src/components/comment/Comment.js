@@ -33,6 +33,9 @@ export default class Comment extends React.Component {
                 if (response.data.code == 200) {//保存成功
                     //保存成功后获取最后一条评论 （重服务器）
                     this.refs.comment_list.newComment(response.data.data.floor,response.data.data.id,this.state.content);
+                    alert('回复成功');
+                    //清空content内容
+                    this.setState({content:null})
                 } else {//保存失败
                     alert(response.data.msg);
                 }
@@ -69,10 +72,10 @@ export default class Comment extends React.Component {
             button_name = "提交留言";
         }
         return (
-            <div>
+            <div id="comment_input">
                 <Icon type="message"/> <span style={{marginLeft: 5}}>留言支持markdown</span>
                 <div style={{padding: 5}}>
-                    <TextArea type="textarea" placeholder="文明社会，理性评论" autosize onChange={this.setContent}/>
+                    <TextArea type="textarea" placeholder="文明社会，理性评论" value={this.state.content} autosize onChange={this.setContent}/>
                 </div>
                 <div style={{textAlign: "right", marginRight: 5}}>
                     <Button disabled={this.state.disabled} type="primary" onClick={this.submit}>{button_name}</Button>

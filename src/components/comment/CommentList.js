@@ -35,7 +35,7 @@ export default class CommentList extends React.Component {
                 const total = response.data.data.total;
                 list.map(function (val, key, arr) {
                     const floor = (page_no - 1) * 10 + key + 1;//几楼
-                    temp.push(<CommentInfo key={key} comment_id={val.id} floor={floor} content={val.content} acount={val.acount} />)
+                    temp.push(<CommentInfo reply_count={val.reply_count} comment_uid={val.uid} created_at={val.created_at} key={key} comment_id={val.id} floor={floor} content={val.content} acount={val.acount} />)
                 });
                 this.setState({
                     list: temp,
@@ -43,14 +43,15 @@ export default class CommentList extends React.Component {
                     total:total,
                 });
                 const page = <Pagination showQuickJumper defaultCurrent={response.data.data.page_no} total={response.data.data.total} defaultPageSize={response.data.data.per_page} onChange={this.setPageNo}/>
-                //销毁一次组件  因为Pagination 挂载后不会再更新数据
-                this.setState({page: null});
                 this.setState({page})
             }
         ).catch()
     }
     _setPageNo(page_no) {
-        this.setState({page_no}, this.getCommentList)
+        this.setState({page_no}, this.getCommentList);
+        //页面滚动到留言输入框位置
+        const dom = document.getElementById('comment_input');
+        dom.scrollIntoView()
     }
     _newComment(floor,id,content) {
         let temp = [];

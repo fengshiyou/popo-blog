@@ -103,6 +103,7 @@ class Login extends React.Component {
                     //设置localStorage
                     localStorage.setItem('uid',response.data.data.uid);
                     localStorage.setItem('token',response.data.data.token);
+                    localStorage.setItem('acount',response.data.data.acount);
                     //登陆成功后的回调
                     if(this.props.login_call_back){
                         this.props.login_call_back(localStorage.getItem('uid'),localStorage.getItem('token'));

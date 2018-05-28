@@ -65,6 +65,10 @@ body {
 .borderBottom {
     border-bottom: solid 2px black;
 }
+/*虚线下划线*/
+.borderBottomDashed {
+    border-bottom: dashed 1px black;
+}
 /*留言详情*/
 .message-info{
 

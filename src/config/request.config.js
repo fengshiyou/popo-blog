@@ -14,3 +14,5 @@ export const local_request_register =  "http://192.168.150.147:8090/api/user/reg
 export const local_request_add_comment =  "http://192.168.150.147:8090/api/comment/add"
 export const local_request_get_comment_list =  "http://192.168.150.147:8090/api/comment/getList"
 export const local_request_get_last_comment =  "http://192.168.150.147:8090/api/comment/getLast"
+export const local_request_add_reply =  "http://192.168.150.147:8090/api/reply/add"
+export const local_request_get_reply_list =  "http://192.168.150.147:8090/api/reply/getList"
