@@ -6,9 +6,9 @@ import TagsMenu from '../tags/TagsMenu'
 export default class BlogLIstRightMenu extends React.Component {
     render() {
         let catalog_menu = '';
-        let tag_menu =<TagsMenu menu_type={this.props.menu_type} uid={this.props.uid}/>;
-        if (this.props.menu_type != 3) {
-            catalog_menu = <CatalogMenu menu_type={this.props.menu_type} uid={this.props.uid}/>
+        let tag_menu =<TagsMenu blog_type={this.props.blog_type} uid={this.props.uid}/>;
+        if (this.props.blog_type != "home") {//不是博客大厅 显示个人目录
+            catalog_menu = <CatalogMenu blog_type={this.props.blog_type} uid={this.props.uid}/>
         }
 
         return (

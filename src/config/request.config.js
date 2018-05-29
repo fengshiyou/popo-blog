@@ -1,3 +1,4 @@
+export const local_request_get_member_info =  "http://192.168.150.147:8090/api/user/getMemberInfo"
 export const local_request_save_blog =  "http://192.168.150.147:8090/api/blog/save"
 export const local_request_get_tags =  "http://192.168.150.147:8090/api/blog/getTags"
 export const local_request_get_catalog =  "http://192.168.150.147:8090/api/blog/getCatalogList"

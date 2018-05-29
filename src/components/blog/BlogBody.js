@@ -9,7 +9,6 @@ export default class BlogBody extends React.Component {
             <div>
                 {/*react-router 4.0 可选参数是/:a?  不是(/:a)*/}
                 <Route exact path={`${this.props.match.url}/:uid?`} component={BlogListBody}/>
-                <Route path={`${this.props.match.url}/article/:id`} component={BlogArticle}/>
             </div>
         )
     }

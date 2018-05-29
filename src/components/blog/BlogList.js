@@ -8,21 +8,37 @@ import {getConfig} from "../../until/Tool"
 export default class BlogList extends React.Component {
     constructor() {
         super();
-        this.state = {blog_item_list: [], search: '', total: 1, page_no: 1, per_page: 1, page: '', z: ''}
+        this.state = {
+            blog_item_list: [],
+            search: '',
+            total: 1,
+            page_no: 1,
+            per_page: 1,
+            page: ''
+        };
         this.setPageNo = (page_no) => this._setPageNo(page_no)
     }
 
     //接收到新的参数的时候触发，传入新参数(变化过的参数)。旧参数还可以通过this.props获得
     componentWillReceiveProps(newProps) {
         //如果查询参数没变化  则不请求后台
-        if (this.props.search == newProps.search) {
+        if (this.props.search == newProps.search &&this.props.blog_type == newProps.blog_type && this.props.to_uid == newProps.to_uid) {
             return;
         }
-        this.setState({search: newProps.search, page_no: 1}, this.setBlogItemList)
+        this.setState({
+            search: newProps.search,
+            page_no: 1,
+            blog_type: newProps.blog_type,
+            to_uid:newProps.to_uid,
+        }, this.setBlogItemList)
     }
 
     componentDidMount() {
-        this.setState({search: this.props.search}, this.setBlogItemList)
+        this.setState({
+            search: this.props.search,
+            blog_type: this.props.blog_type,
+            to_uid:this.props.to_uid,
+        }, this.setBlogItemList)
     }
 
     _setPageNo(page_no) {
@@ -31,16 +47,20 @@ export default class BlogList extends React.Component {
 
     setBlogItemList() {
         let url = getConfig("request_get_blog_list");
-        if (this.state.search) {
-            url += this.state.search + "&page_no=" + this.state.page_no;
-        } else {
-            url += "?page_no=" + this.state.page_no;
+        url += this.state.search ? this.state.search + "&page_no=" + this.state.page_no : "?page_no=" + this.state.page_no;
+        if (this.state.blog_type == 'home') {//博客大厅
+            url += "&uid=";
+        } else if (this.state.blog_type == 'myblog') {//个人博客
+            url += "&uid=" + localStorage.getItem('uid');
+        } else {//他人博客
+            url += "&uid=" + this.state.to_uid;
         }
+
         const blog_item_list = [];
         axios.get(url).then(
             response => {
                 const response_list = response.data.data.list;
-                const list_type = this.props.list_type;
+                const blog_type = this.props.blog_type;
                 if (response_list.length > 0) {
                     response_list.map(function (value, key, arr) {
                         const content = value.content ? value.content : "";
@@ -53,8 +73,8 @@ export default class BlogList extends React.Component {
                             catalog={value.catalog}
                             catalog_id={value.catalog_id}
                             id={value.id}
-                            uid={value.uid}
-                            list_type={list_type}
+                            to_uid={value.uid}
+                            blog_type={blog_type}
                             acount={value.acount}
                             content_id={value.content_id}
                         />)
@@ -75,7 +95,7 @@ export default class BlogList extends React.Component {
                     per_page: response.data.data.per_page
                 });
                 //回到顶部
-                window.scrollTo(0,0);
+                window.scrollTo(0, 0);
             }
         ).catch()
     }
@@ -84,7 +104,7 @@ export default class BlogList extends React.Component {
     render() {
         return (
             <div>
-                <NeadLoginButton className="margin-t-5 margin-l-5" component={Button} size="small" type="primary" context="写博客" icon="edit" link_to="/editor"/>
+                <NeadLoginButton className="margin-t-5 margin-l-5" component={Button} size="small" type="primary" context="写博客" icon="edit" link_to="/home/editor"/>
                 {this.state.blog_item_list}
                 {this.state.page}
             </div>

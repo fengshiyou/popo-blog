@@ -71,7 +71,7 @@ class CatalogMenu extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.menu_type == 1) {//1:个人博客(显示个人目录) 2:他人博客(显示他人目录)
+        if (this.props.blog_type == "myblog") {//myblog:个人博客(显示个人目录) user:他人博客(显示他人目录)
             //通过store的中间件修改过的dispatch  dispatch()   if (typeof action === 'function') {return action(dispatch, getState, extraArgument);}
             const {dispatch} = this.props;
             //个人博客 通过action生成数据
@@ -86,10 +86,26 @@ class CatalogMenu extends React.Component {
             ).catch()
         }
     }
+    componentWillReceiveProps(newProps) {
+        if (newProps.blog_type == "myblog") {//myblog:个人博客(显示个人目录) user:他人博客(显示他人目录)
+            //通过store的中间件修改过的dispatch  dispatch()   if (typeof action === 'function') {return action(dispatch, getState, extraArgument);}
+            const {dispatch} = this.props;
+            //个人博客 通过action生成数据
+            dispatch(getMyCatalog());
+        } else {
+            const url = getConfig('request_get_catalog') + "?uid=" + newProps.uid;
+            //他人博客  去后台获取
+            axios.get(url).then(
+                response => {
+                    this.setState({list: response.data.data})
+                }
+            ).catch()
+        }
+    }
 
     //获取列表
     _getCatalogList() {
-        if (this.props.menu_type == 1) {//1:个人博客(显示个人目录) 2:他人博客(显示他人目录)
+        if (this.props.blog_type == "myblog") {//myblog:个人博客(显示个人目录) user:他人博客(显示他人目录)
             return this.formatCatalogMenu(this.props.items);
         } else {
             return this.formatCatalogMenu(this.state.list);
@@ -110,7 +126,7 @@ class CatalogMenu extends React.Component {
             let button_group = '';
             //目录title
             let menu_title = '';
-            if (this.props.menu_type == 1) {//1:个人博客(显示个人目录和功能按钮) 2:他人博客(显示他人目录)
+            if (this.props.blog_type == "myblog") {//myblog:个人博客(显示个人目录和功能按钮) user:他人博客(显示他人目录)
                 let edit_button = '';
                 let del_button = '';
                 if (catalog_list[i].parent_id != -1) {//根目录不允许删除和改名
@@ -159,11 +175,8 @@ class CatalogMenu extends React.Component {
                         {del_button}
                     </span>
                 );
-                name = <Link to={"/myblog?catalog_id=" + id}>{name}</Link>;
-            } else {
-                name = <Link to={"/blog/" + this.props.uid + "?catalog_id=" + id}>{name}</Link>;
             }
-
+            name = <Link to={`/${this.props.uid}/blog/${this.props.blog_type}?catalog_id=${id}`}>{name}</Link>;
             if (catalog_list[i].next.length > 0) {//如果有子目录
                 result_catalog_menu.push(
                     <div key={id} data-catalog-id={id}>
@@ -201,7 +214,7 @@ class CatalogMenu extends React.Component {
     render() {
         let catalog_list = this.getCatalogList();
         let menu_title = '';
-        if (this.props.menu_type == 1) {//1:个人博客(显示个人目录和功能按钮) 2:他人博客(显示他人目录)
+        if (this.props.blog_type == "myblog") {//myblog:个人博客(显示个人目录和功能按钮) user:他人博客(显示他人目录)
             menu_title = (
                 <div className="text-center">
                     <h1>
@@ -211,7 +224,7 @@ class CatalogMenu extends React.Component {
                     <hr/>
                 </div>
             )
-        } else if (this.props.menu_type == 2) {
+        } else if (this.props.blog_type == "user") {
             //根目录就是用户名
             const user_name = this.state.list.length > 0 ? this.state.list[0].catalog_name : "";
             menu_title = (

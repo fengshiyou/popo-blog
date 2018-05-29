@@ -18,8 +18,11 @@ class BlogListItem extends React.Component {
         //定义标签dom列表
         let tag_list = [];
         //列表类型
-        const list_type = this.props.list_type;//1:个人博客 2:他人博客 3:博客大厅   只有个人博客link特殊
-        const uid = this.props.uid;
+        const blog_type = this.props.blog_type;//myblog:个人博客 user:他人博客 home:博客大厅   只有个人博客link特殊
+        //保存blog 所属UID
+        const blog_uid = this.props.to_uid;
+        //如果目标uid是本身 则跳转到自己的博客
+        const to_uid = this.props.to_uid == localStorage.getItem('uid') ? "home" : this.props.to_uid;
         //如果有全局标签
         if (this.props.items.length) {
             //标签转数组 1，2，3 转 [1,2,3]  如果没有传tags 则空
@@ -28,11 +31,7 @@ class BlogListItem extends React.Component {
                 //标签背景色
                 const back_ground_color = {backgroundColor: this.props.items[value].color}
                 //组装标签
-                if (list_type == 1) {
-                    tag_list.push(<Link to={"/myblog?tag_id=" + value} className="white margin-l-5 padding-0-5" key={key} style={back_ground_color}>{this.props.items[value].name}</Link>);
-                }else{
-                    tag_list.push(<Link to={"/blog?tag_id=" + value} className="white margin-l-5 padding-0-5" key={key} style={back_ground_color}>{this.props.items[value].name}</Link>);
-                }
+                tag_list.push(<Link to={`/${to_uid}/blog/${blog_type}?tag_id=${value}`} className="white margin-l-5 padding-0-5" key={key} style={back_ground_color}>{this.props.items[value].name}</Link>);
             });
         }
         const created_at = this.props.created_at.split('T')[0];
@@ -48,25 +47,21 @@ class BlogListItem extends React.Component {
                 new_catalog[catalog_info[1]] = catalog_info
             });
             new_catalog.map(function (value, key, arr) {
-                if (list_type == 1) {
-                    catalog_list.push(<Link to={"/myblog?catalog_id=" + value[1]} key={key} className="blog-item-catalog white">{value[0]}</Link>)
-                }else{
-                    catalog_list.push(<Link to={"/blog/" + uid +"?catalog_id=" + value[1]} key={key} className="blog-item-catalog white">{value[0]}</Link>)
-                }
+                catalog_list.push(<Link to={`/${to_uid}/blog/${blog_type}?catalog_id=${value[1]}`} key={key} className="blog-item-catalog white">{value[0]}</Link>)
             })
         }
         //编辑按钮
         let editor_button = '';
-        if (localStorage.getItem('uid') == uid) {
-            editor_button = <NeadLoginButton className="margin-t-5 margin-l-5" component={Button} size="small" context="编辑" icon="edit" link_to={"/editor?id=" + this.props.id}/>
+        if (localStorage.getItem('uid') == blog_uid) {
+            editor_button = <NeadLoginButton className="margin-t-5 margin-l-5" component={Button} size="small" context="编辑" icon="edit" link_to={"/home/editor?id=" + this.props.id}/>
         }
         return (
             <div className="blog-item">
                 <div className="blog-item-title">
-                    <Link className="black" to={`/blog/article/${this.props.id}`}>{this.props.title}</Link>
+                    <Link className="black" to={`/${to_uid}/article/${this.props.id}`}>{this.props.title}</Link>
                 </div>
                 <div>
-                    <Link className="black" to={'/blog/' + this.props.uid}>
+                    <Link className="black" to={`/${to_uid}/blog/${blog_type}`}>
                         <Icon type="user"/>
                         {this.props.acount}
                     </Link>

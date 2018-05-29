@@ -17,11 +17,11 @@ class BlogSaveDialog extends React.Component {
     }
 
     _ok() {
-        this.props.history.push('/blog/article/' + this.props.id);
+        this.props.history.push('/home/article/' + this.props.id);
     }
     _cancel(){
         this.setState({visable:false})
-        this.props.history.push('/editor?id=' + this.props.id);
+        this.props.history.push('/home/editor?id=' + this.props.id);
     }
     render() {
         return (
