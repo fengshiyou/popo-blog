@@ -1,12 +1,16 @@
 import React from 'react'
-export default class LogoutButton extends React.Component{
+
+import {withRouter} from "react-router-dom";
+class LogoutButton extends React.Component{
     constructor(){
         super();
         this.logout =() => {
             localStorage.removeItem("token");
             localStorage.removeItem("uid");
             localStorage.removeItem("user_name");
+            localStorage.removeItem("acount");
             location.reload();
+            this.props.history.push('/home/blog/home');
         }
     }
     render(){
@@ -17,3 +21,4 @@ export default class LogoutButton extends React.Component{
         )
     }
 }
+export default withRouter(LogoutButton)

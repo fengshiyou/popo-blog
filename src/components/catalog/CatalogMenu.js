@@ -51,7 +51,7 @@ class CatalogMenu extends React.Component {
     _showEditModal(button_type, name, id) {
         const edit_modal = (
             <CatalogEditDialog
-                catalog_name={name} //目录目标名称
+                catalog_name={name} //目标目录名称
                 catalog_id={id} //目录目标ID
                 visible={true} //显示
                 type={button_type} //按钮类型  rename:重命名 add:新增子目录 del:删除该目录
@@ -77,7 +77,7 @@ class CatalogMenu extends React.Component {
             //个人博客 通过action生成数据
             dispatch(getMyCatalog());
         } else {
-            const url = getConfig('request_get_catalog') + "?uid=" + this.props.uid;
+            const url = getConfig('request_get_catalog') + "?uid=" + this.props.blog_type;
             //他人博客  去后台获取
             axios.get(url).then(
                 response => {
@@ -93,7 +93,7 @@ class CatalogMenu extends React.Component {
             //个人博客 通过action生成数据
             dispatch(getMyCatalog());
         } else {
-            const url = getConfig('request_get_catalog') + "?uid=" + newProps.uid;
+            const url = getConfig('request_get_catalog') + "?uid=" + newProps.blog_type;
             //他人博客  去后台获取
             axios.get(url).then(
                 response => {
@@ -176,7 +176,7 @@ class CatalogMenu extends React.Component {
                     </span>
                 );
             }
-            name = <Link to={`/${this.props.uid}/blog/${this.props.blog_type}?catalog_id=${id}`}>{name}</Link>;
+            const catalog_name = <Link to={`/${this.props.to_uid}/blog/${this.props.blog_type}?catalog_id=${id}`}>{name}</Link>;
             if (catalog_list[i].next.length > 0) {//如果有子目录
                 result_catalog_menu.push(
                     <div key={id} data-catalog-id={id}>
@@ -185,7 +185,7 @@ class CatalogMenu extends React.Component {
                                 onMouseOver={(e) => this.setEditButtonOp(e, id, 0.3)}
                                 onMouseLeave={(e) => this.setEditButtonOp(e, id, 0)}
                             >
-                                {name}（{catalog_list[i].count}）
+                                {catalog_name}（{catalog_list[i].count}）
                             </span>
                             {button_group}
                             {this.formatCatalogMenu(catalog_list[i].next)}
@@ -200,7 +200,7 @@ class CatalogMenu extends React.Component {
                                 onMouseOver={(e) => this.setEditButtonOp(e, id, 0.3)}
                                 onMouseLeave={(e) => this.setEditButtonOp(e, id, 0)}
                             >
-                                {name}（{catalog_list[i].count}）
+                                {catalog_name}（{catalog_list[i].count}）
                             </span>
                             {button_group}
                         </div>
@@ -224,7 +224,7 @@ class CatalogMenu extends React.Component {
                     <hr/>
                 </div>
             )
-        } else if (this.props.blog_type == "user") {
+        } else {
             //根目录就是用户名
             const user_name = this.state.list.length > 0 ? this.state.list[0].catalog_name : "";
             menu_title = (

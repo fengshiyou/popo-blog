@@ -13,7 +13,7 @@ export default class BlogListBody extends React.Component {
 
         //我的博客 blog_type == 'myblog'
         //博客大厅 blog_type == 'home'
-        //他人博客 blog_type == 'user'
+        //他人博客 blog_type == 用户的id
 
         const search = this.props.location.search;
 
@@ -24,7 +24,7 @@ export default class BlogListBody extends React.Component {
                         <BlogList blog_type={blog_type} search={search} to_uid={to_uid}/>
                     </Col>
                     <Col span={5}>
-                        <BlogLIstRightMenu blog_type={blog_type} uid={to_uid}/>
+                        <BlogLIstRightMenu blog_type={blog_type} to_uid={to_uid}/>
                     </Col>
                 </Row>
             </div>

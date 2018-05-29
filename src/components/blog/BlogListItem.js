@@ -17,12 +17,11 @@ class BlogListItem extends React.Component {
     render() {
         //定义标签dom列表
         let tag_list = [];
-        //列表类型
-        const blog_type = this.props.blog_type;//myblog:个人博客 user:他人博客 home:博客大厅   只有个人博客link特殊
-        //保存blog 所属UID
-        const blog_uid = this.props.to_uid;
-        //如果目标uid是本身 则跳转到自己的博客
-        const to_uid = this.props.to_uid == localStorage.getItem('uid') ? "home" : this.props.to_uid;
+        //目标ID
+        const to_uid = this.props.to_uid;
+        //列表类型 myblog:个人博客 home:博客大厅 其他:用户ID   此处链接不可能到博客大厅
+        const blog_type = this.props.blog_uid == localStorage.getItem('uid') ? "myblog" : this.props.blog_uid;
+
         //如果有全局标签
         if (this.props.items.length) {
             //标签转数组 1，2，3 转 [1,2,3]  如果没有传tags 则空
@@ -52,7 +51,7 @@ class BlogListItem extends React.Component {
         }
         //编辑按钮
         let editor_button = '';
-        if (localStorage.getItem('uid') == blog_uid) {
+        if (localStorage.getItem('uid') == this.props.blog_uid) {
             editor_button = <NeadLoginButton className="margin-t-5 margin-l-5" component={Button} size="small" context="编辑" icon="edit" link_to={"/home/editor?id=" + this.props.id}/>
         }
         return (

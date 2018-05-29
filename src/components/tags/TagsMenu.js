@@ -31,10 +31,10 @@ class TagsMenu extends React.Component {
         let title = '';
         if (this.props.blog_type == 'myblog') {
             title = "点击标签查询个人对应标签的博客";
-        } else if (this.props.blog_type == 'user') {
-            title = "点击标签查询该博主的对应博客";
         } else if (this.props.blog_type == 'home') {
             title = "点击标签查询大厅中的对应标签的博客";
+        } else{
+            title = "点击标签查询该博主的对应博客";
         }
         return (
             <div className="text-center">

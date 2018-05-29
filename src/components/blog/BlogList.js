@@ -22,14 +22,14 @@ export default class BlogList extends React.Component {
     //接收到新的参数的时候触发，传入新参数(变化过的参数)。旧参数还可以通过this.props获得
     componentWillReceiveProps(newProps) {
         //如果查询参数没变化  则不请求后台
-        if (this.props.search == newProps.search &&this.props.blog_type == newProps.blog_type && this.props.to_uid == newProps.to_uid) {
+        if (this.props.search == newProps.search && this.props.blog_type == newProps.blog_type && this.props.to_uid == newProps.to_uid) {
             return;
         }
         this.setState({
             search: newProps.search,
             page_no: 1,
             blog_type: newProps.blog_type,
-            to_uid:newProps.to_uid,
+            to_uid: newProps.to_uid,
         }, this.setBlogItemList)
     }
 
@@ -37,7 +37,7 @@ export default class BlogList extends React.Component {
         this.setState({
             search: this.props.search,
             blog_type: this.props.blog_type,
-            to_uid:this.props.to_uid,
+            to_uid: this.props.to_uid,
         }, this.setBlogItemList)
     }
 
@@ -53,7 +53,7 @@ export default class BlogList extends React.Component {
         } else if (this.state.blog_type == 'myblog') {//个人博客
             url += "&uid=" + localStorage.getItem('uid');
         } else {//他人博客
-            url += "&uid=" + this.state.to_uid;
+            url += "&uid=" + this.state.blog_type;
         }
 
         const blog_item_list = [];
@@ -62,6 +62,7 @@ export default class BlogList extends React.Component {
                 const response_list = response.data.data.list;
                 const blog_type = this.props.blog_type;
                 if (response_list.length > 0) {
+                    const to_uid = this.state.to_uid;
                     response_list.map(function (value, key, arr) {
                         const content = value.content ? value.content : "";
                         blog_item_list.push(<BlogListItem
@@ -73,7 +74,8 @@ export default class BlogList extends React.Component {
                             catalog={value.catalog}
                             catalog_id={value.catalog_id}
                             id={value.id}
-                            to_uid={value.uid}
+                            to_uid={to_uid}
+                            blog_uid={value.uid}
                             blog_type={blog_type}
                             acount={value.acount}
                             content_id={value.content_id}
