@@ -11,6 +11,7 @@ export default class CommentList extends React.Component {
             list: [],//评论列表
             page: null,//评论页数
             page_no:1,
+            id:null,
 
         };
         //获取列表
@@ -23,7 +24,7 @@ export default class CommentList extends React.Component {
     }
 
     _getCommentList() {
-        const url = getConfig('request_get_comment_list') + "?comment_type=" + this.props.comment_type + "&id=" + this.props.id + "&page_no=" + this.state.page_no;
+        const url = getConfig('request_get_comment_list') + "?comment_type=" + this.props.comment_type + "&id=" + this.state.id + "&page_no=" + this.state.page_no;
         axios.get(url).then(
             response => {
                 let temp = [];
@@ -55,14 +56,20 @@ export default class CommentList extends React.Component {
     }
     _newComment(floor,id,content) {
         let temp = [];
-        //key 最大就到10
-        temp.push(<CommentInfo key={11} comment_id={id} floor={floor} content={content} />)
+        temp.push(<CommentInfo reply_count={0} key={floor} comment_id={id} floor={floor} content={content} />)
         this.setState({
             list: this.state.list.concat(temp),
         });
     }
     componentDidMount() {
-        this.getCommentList();
+        this.setState({
+           id:this.props.id,
+        },this.getCommentList);
+    }
+    componentWillReceiveProps(newProps){
+        this.setState({
+            id:newProps.id,
+        },this.getCommentList);
     }
 
     render() {

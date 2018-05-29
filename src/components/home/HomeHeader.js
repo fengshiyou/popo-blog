@@ -4,6 +4,7 @@ import "../../css/home/HomeHeader.css"
 
 export default class HomeHeader extends React.Component {
     render() {
+        console.log(this.props)
         return (
             <div className="home-header black-back">
                 <div className="home-header-title">
