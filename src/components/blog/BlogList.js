@@ -46,6 +46,7 @@ export default class BlogList extends React.Component {
                         const content = value.content ? value.content : "";
                         blog_item_list.push(<BlogListItem
                             title={value.title}
+                            comment_count={value.comment_count}
                             key={key}
                             created_at={value.created_at}
                             tags={value.tags}

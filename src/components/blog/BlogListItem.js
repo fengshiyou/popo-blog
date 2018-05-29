@@ -75,6 +75,10 @@ class BlogListItem extends React.Component {
                     <Icon type="calendar"/>
                     <span className="gray-back blog-item-content">{created_at}</span>
                 </div>
+                <div className="blog-item-tag inline">
+                    <Icon type="message"/>
+                    <span className="black-back blog-item-content">({this.props.comment_count})条评论</span>
+                </div>
                 <div className="inline">
                     <Icon type="bars"/>
                     <span className="blog-item-content" style={category_back_ground_color}>

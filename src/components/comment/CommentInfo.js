@@ -19,6 +19,7 @@ export default class CommentInfo extends React.Component {
             content: null,//回复的内容
             disabled: true,//是否可以回复
             page_no: 1,//页数(回复列表的页数)
+            reply_count: null,//回复数量
         };
         //显示回复内容
         this.showReplyList = () => this._showReplyList();
@@ -43,6 +44,7 @@ export default class CommentInfo extends React.Component {
     componentDidMount() {
         this.setState({
             comment_uid: this.props.comment_uid,
+            reply_count: this.props.reply_count,
         });
     }
 
@@ -105,6 +107,7 @@ export default class CommentInfo extends React.Component {
                     this.setState({
                         reply_list: this.state.reply_list.concat(temp),
                         content: null,//清空输入框内容
+                        reply_count: parseInt(this.state.reply_count) + 1,
                     });
                 } else {//保存失败
                     alert(response.data.msg);
@@ -222,7 +225,7 @@ export default class CommentInfo extends React.Component {
                     <div><Icon type="calendar"/>{this.props.created_at}</div>
                     <div>
                         <Icon type="message"/>
-                        <span onClick={this.showReplyList}>({this.props.reply_count})评论</span>
+                        <span onClick={this.showReplyList}>({this.state.reply_count})评论</span>
                     </div>
                 </div>
                 <div style={{display: this.state.reply_show ? "block" : "none", marginLeft: 20, marginRight: 20}}>
