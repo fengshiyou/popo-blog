@@ -17,7 +17,7 @@ export default class Home extends React.Component {
         return (
             <div>
                 <Route path={`/:to_uid/`} component={HomeHeader}/>
-                <Route exact path={`${this.props.match.url}/`} component={HomeBody}/>
+                <Route exact path={`/:to_uid/`} component={HomeBody}/>
                 <Route path={`/:to_uid/blog/:blog_type`} component={BlogListBody}/>
                 <Route path={`${this.props.match.url}/article/:id`} component={BlogArticle}/>
                 <Route path={`/:to_uid/comment`} component={CommentToUser}/>

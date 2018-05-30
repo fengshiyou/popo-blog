@@ -8,15 +8,11 @@
     display: flex;
     justify-content: center; /*内容居中*/
     flex-grow: 1;
-}
-.home-header-title a,.home-header-title a:hover{
     font-size: 20px;
     color: white;
 }
 .home-header-subtitle {
     flex-grow: 2;
-}
-.home-header-subtitle a,.home-header-subtitle a:hover{
     font-size: 16px;
     color: rgb(136, 136, 136);
 }
@@ -36,6 +32,12 @@
     transition: .5s;
 }
 .home-header-nav-item:hover {
+    color: white;
+    background-color: rgb(50, 50, 50);
+    border-bottom:solid 5px #14d5ff;
+    cursor:pointer;
+}
+.home-header-nav-item-active {
     color: white;
     background-color: rgb(50, 50, 50);
     border-bottom:solid 5px #14d5ff;

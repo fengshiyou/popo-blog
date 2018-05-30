@@ -2,11 +2,13 @@ import {createStore, applyMiddleware, combineReducers} from 'redux' //createStor
 import thunkMiddleWare from 'redux-thunk' //中间件 修改dispatch  dispatch()   if (typeof action === 'function') {return action(dispatch, getState, extraArgument);}
 import {catalogReducer} from '../action/myCatalogAction'  //文章目录的Reducer
 import {tagsReducer} from '../action/tagsAction'  //标签的Reducer
+import {userDetailReducer} from '../action/userDetailAction'  //标签的Reducer
 
 //组合reducer
 var Reducer = combineReducers({
     catalogReducer,
-    tagsReducer
+    tagsReducer,
+    userDetailReducer
 })
 
 //配置store
