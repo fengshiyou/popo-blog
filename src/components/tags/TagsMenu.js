@@ -11,11 +11,11 @@ class TagsMenu extends React.Component {
 
     _formateTags(tags) {
         let return_tags = [];
-        const uid = this.props.uid;
+        const to_uid = this.props.to_uid;
         const blog_type = this.props.blog_type;
         tags.map(function (val, key, arr) {
             return_tags.push(
-                <Link to={`/${uid}/blog/${blog_type}?tag_id=${val.id}`} className="margin-l-5 padding-0-5" key={key} style={{backgroundColor: val.color, color: "white", textAlign: "center"}}>{val.name}</Link>
+                <Link to={`/${to_uid}/blog/${blog_type}?tag_id=${val.id}`} className="margin-l-5 padding-0-5" key={key} style={{backgroundColor: val.color, color: "white", textAlign: "center"}}>{val.name}</Link>
             )
         });
         return return_tags
