@@ -54,16 +54,23 @@ class BlogListItem extends React.Component {
         if (localStorage.getItem('uid') == this.props.blog_uid) {
             editor_button = <NeadLoginButton className="margin-t-5 margin-l-5" component={Button} size="small" context="编辑" icon="edit" link_to={"/home/editor?id=" + this.props.id}/>
         }
+        //跳转用户博客
+        let user_href = '';
+        if(this.props.blog_uid == localStorage.getItem('uid')){
+            user_href = `/#/home/blog/myblog`;
+        }else{
+            user_href = `/#/${this.props.blog_uid}/blog/${this.props.blog_uid}`
+        }
         return (
             <div className="blog-item">
                 <div className="blog-item-title">
                     <Link className="black" to={`/${to_uid}/article/${this.props.id}`}>{this.props.title}</Link>
                 </div>
                 <div>
-                    <span onClick={()=>window.open(`/#/${this.props.blog_uid}/blog/${this.props.blog_uid}`,'_blank')} className="black" >
+                    <a target='_blank' href={user_href} className="black" >
                         <Icon type="user"/>
                         {this.props.acount}
-                    </span>
+                    </a>
                 </div>
                 <div className="blog-item-tag inline">
                     <Icon type="calendar"/>
