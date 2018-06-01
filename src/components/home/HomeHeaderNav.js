@@ -25,7 +25,7 @@ export default class HomeHeaderNav extends React.Component {
                     <Link to="/" className="home-header-nav-item text-center">关于</Link>
                     <Link to={`/${this.props.to_uid}/comment`} className={`home-header-nav-item text-center ${this.props.path_name == `/${this.props.to_uid}/comment` ? 'home-header-nav-item-active' : ''}`}>留言版</Link>
                     <NeadLoginButton className={`home-header-nav-item text-center ${this.props.path_name == `/home/blog/myblog` ? 'home-header-nav-item-active' : ''}`} component={HomeHeaderNavButton} context="我的博客" link_to={`/home/blog/myblog`}/>
-                    <Link to={`/${this.props.to_uid}/comment`} className="home-header-nav-item text-center">个人设置</Link>
+                    <Link to={`/home/setting/userInfo`} className={`home-header-nav-item text-center ${this.props.path_name.indexOf('/home/setting/') == 0 ? 'home-header-nav-item-active' : ''}`}>个人设置</Link>
                     <LogoutButton className="home-header-nav-item text-center"/>
                 </div>
             );

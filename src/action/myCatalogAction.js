@@ -7,7 +7,7 @@ function fetch() {
         //请求中的dispatch
         dispatch({type: "REQUEST_CATALOGLIST"})
         const url = getConfig("request_get_my_catalog");
-        let post_params = {}
+        let post_params = {};
         post_params.login_uid = localStorage.getItem('uid');
         post_params.token = localStorage.getItem('token');
 

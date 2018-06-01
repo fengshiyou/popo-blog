@@ -46,6 +46,8 @@ export function userDetailReducer(state = {fetching: false, items: []}, action) 
             return Object.assign({}, state, {fetching: false, items: action.items});
         case "REQUEST_USER_DETAIL":
             return Object.assign({}, state, {fetching: true});
+        case "EDIT_USER_DETAIL":
+            return Object.assign({}, state, {fetching: false,items:action.items});
         default:
             return state;
     }

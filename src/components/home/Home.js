@@ -11,6 +11,7 @@ import CommentToUser from "../comment/CommentToUser";
 import BlogArticle from "../blog/BlogArticle";
 import BlogListBody from "../blog/BlogListBody";
 import NeadLoginButton from "../login/NeadLoginButton"
+import Setting from "../setting/Setting";
 
 export default class Home extends React.Component {
     render() {
@@ -21,6 +22,7 @@ export default class Home extends React.Component {
                 <Route path={`/:to_uid/blog/:blog_type`} component={BlogListBody}/>
                 <Route path={`${this.props.match.url}/article/:id`} component={BlogArticle}/>
                 <Route path={`/:to_uid/comment`} component={CommentToUser}/>
+                <Route path={`/home/setting/:type`} component={Setting}/>
                 <PrivateRoute path={`/home/editor`} component={Eidtor}/>
                 <Route path={`${this.props.match.url}/`} component={HomeFooter}/>
             </div>

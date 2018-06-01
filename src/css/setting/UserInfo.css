@@ -1,0 +1,15 @@
+.user-info {
+    margin-left: 50px;
+    margin-right: 30px;
+}
+
+.user-info-item {
+    border-bottom: solid 1px #F1D091;
+    height: 70px;
+    line-height: 70px;
+}
+
+.user-info-item-des {
+    width: 100px;
+    display: inline-block;
+}

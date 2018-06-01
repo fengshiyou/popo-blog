@@ -1,7 +1,4 @@
 import React from 'react'
-import {Input, Icon, Button} from 'antd';
-import LCAxios from '../../until/LoginCheckAxios'
-import {getConfig} from '../../until/Tool'
 import CommentList from './CommentList'
 import CommentInput from './CommentInput'
 
