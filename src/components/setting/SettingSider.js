@@ -21,8 +21,8 @@ export default class SettingSider extends React.Component {
                     <Menu.Item key="user">
                         <Link to={`/home/setting/user`}>用户管理</Link>
                     </Menu.Item>
-                    <Menu.Item key="authGroup">
-                        <Link to={`/home/setting/authGroup`}>权限组管理</Link>
+                    <Menu.Item key="PowerGroup">
+                        <Link to={`/home/setting/PowerGroup`}>权限组管理</Link>
                     </Menu.Item>
                     <Menu.Item key="log">
                         <Link to={`/home/setting/log`}>日志查看</Link>

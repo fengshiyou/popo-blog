@@ -3,9 +3,12 @@ import React from 'react'
 import Login from '../components/login/Login'
 
 export default function loginCheckAxios({...params}) {
-    const {url, success, failSet, type, post_params} = params;
+    let {url, success, failSet, type, post_params} = params;
     post_params.login_uid = localStorage.getItem('uid');
     post_params.token = localStorage.getItem('token');
+    if(type == "get"){
+        url = url + "?login_uid=" + localStorage.getItem('uid') + "&token=" + localStorage.getItem('token');
+    }
     axios[type](url, post_params).then(
         response => {
             if (response.data.code !== 1 && response.data.code !== 2) {

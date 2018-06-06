@@ -4,6 +4,7 @@ import {getHeightByRadio} from '../../until/Tool'
 import SettingSider from "./SettingSider";
 import {Route} from 'react-router-dom'
 import SettingUserInfo from "./SettingUserInfo";
+import SettingPowerGroup from "./SettingPowerGroup";
 const { Content } = Layout;
 export default class Setting extends React.Component {
     render() {
@@ -14,6 +15,7 @@ export default class Setting extends React.Component {
                     <SettingSider type={type}/>
                     <Content style={{backgroundColor:'white'}}>
                         <Route path={`/home/setting/userInfo/`} component={SettingUserInfo}/>
+                        <Route path={`/home/setting/PowerGroup/`} component={SettingPowerGroup}/>
                     </Content>
                 </Layout>
 
