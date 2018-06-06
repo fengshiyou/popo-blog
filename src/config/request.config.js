@@ -25,3 +25,5 @@ export const local_request_add_power_role =  "http://192.168.150.148:8090/api/po
 export const local_request_add_power_url =  "http://192.168.150.148:8090/api/power/addPowerUrl"
 export const local_request_del_power_role =  "http://192.168.150.148:8090/api/power/delPowerRole"
 export const local_request_del_power_url =  "http://192.168.150.148:8090/api/power/delPowerUrl"
+export const local_request_del_tag =  "http://192.168.150.148:8090/api/tag/del"
+export const local_request_edit_tag =  "http://192.168.150.148:8090/api/tag/edit"

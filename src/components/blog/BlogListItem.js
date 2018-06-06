@@ -1,6 +1,6 @@
 import React from 'react'
 import "../../css/blog/BlogItem.css"
-import {Icon, Button} from 'antd'
+import {Icon, Button,Tag} from 'antd'
 import {Link, Route,Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {mapStateToProps, getAllTags} from '../../action/tagsAction'
@@ -30,7 +30,7 @@ class BlogListItem extends React.Component {
                 //标签背景色
                 const back_ground_color = {backgroundColor: this.props.items[value].color}
                 //组装标签
-                tag_list.push(<Link to={`/${to_uid}/blog/${blog_type}?tag_id=${value}`} className="white margin-l-5 padding-0-5" key={key} style={back_ground_color}>{this.props.items[value].name}</Link>);
+                tag_list.push(<Link to={`/${to_uid}/blog/${blog_type}?tag_id=${value}`} key={key} ><Tag color={this.props.items[value].color}>{this.props.items[value].name}</Tag></Link>);
             });
         }
         const created_at = this.props.created_at.split('T')[0];

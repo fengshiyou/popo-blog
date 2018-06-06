@@ -17,7 +17,12 @@ function fetch() {
         ).catch()
     }
 }
-
+//强制更新数据
+export function initTags() {
+    return (dispatch) => {
+        return dispatch(fetch())
+    }
+}
 /**
  * 是否需要请求后台
  */

@@ -5,6 +5,7 @@ import SettingSider from "./SettingSider";
 import {Route} from 'react-router-dom'
 import SettingUserInfo from "./SettingUserInfo";
 import SettingPowerGroup from "./SettingPowerGroup";
+import SettingTags from "./SettingTags";
 const { Content } = Layout;
 export default class Setting extends React.Component {
     render() {
@@ -16,6 +17,7 @@ export default class Setting extends React.Component {
                     <Content style={{backgroundColor:'white'}}>
                         <Route path={`/home/setting/userInfo/`} component={SettingUserInfo}/>
                         <Route path={`/home/setting/PowerGroup/`} component={SettingPowerGroup}/>
+                        <Route path={`/home/setting/tags/`} component={SettingTags}/>
                     </Content>
                 </Layout>
 
