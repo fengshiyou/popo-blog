@@ -32,6 +32,20 @@ class SettingUserInfo extends React.Component {
 
     componentDidMount() {
         this.getUserDetail(localStorage.getItem('uid'))
+        this.setState({
+            acount: this.props.items.acount,
+            header_graph: this.props.items.header_graph,
+            header_welcome: this.props.items.header_welcome,
+            icon_url: this.props.items.icon_url,
+            link1: this.props.items.link1,
+            link1_des: this.props.items.link1_des,
+            link2: this.props.items.link2,
+            link2_des: this.props.items.link2_des,
+            link3: this.props.items.link3,
+            link3_des: this.props.items.link3_des,
+            motto: this.props.items.motto,
+            uid: this.props.items.uid,
+        })
     }
 
     getUserDetail(to_uid) {

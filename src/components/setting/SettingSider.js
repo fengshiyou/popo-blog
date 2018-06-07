@@ -19,7 +19,7 @@ export default class SettingSider extends React.Component {
                         <Link to={`/home/setting/tags`}>标签管理</Link>
                     </Menu.Item>
                     <Menu.Item key="user">
-                        <Link to={`/home/setting/user`}>用户管理</Link>
+                        <Link to={`/home/setting/userManage`}>用户管理</Link>
                     </Menu.Item>
                     <Menu.Item key="PowerGroup">
                         <Link to={`/home/setting/PowerGroup`}>权限组管理</Link>
