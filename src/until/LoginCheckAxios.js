@@ -22,7 +22,7 @@ export default function loginCheckAxios({...params}) {
                         post_params.login_uid = login_uid;
                         post_params.token = token;
                         axios[type](url, post_params).then(response => success(response)).catch();
-                    }
+                    };
                     failSet(<Login visible={true} close={modal_close} params={params} login_call_back={loginCallBack}/>);
                 } else if (response.data.msg == "nead_check") {//需要验证密码
                     //需要验证

@@ -21,9 +21,7 @@ class HomeHeader extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (this.props.match.params.to_uid == newProps.match.params.to_uid) {
-            return;
-        }
+
         let to_uid = '';
         if (newProps.match.params.to_uid == 'home') {
             to_uid = localStorage.getItem('uid');
