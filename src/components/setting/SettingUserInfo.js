@@ -98,7 +98,7 @@ class SettingUserInfo extends React.Component {
 
     _setUserInfo(e, key) {
         const value = e.target.value;
-        //setState 根据变量key设置内容
+        //@todo 需要整理setState 根据变量key设置内容
         this.setState(() => ({
             [key]: value
         }));

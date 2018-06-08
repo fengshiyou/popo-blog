@@ -1,6 +1,6 @@
 import React from 'react'
 import LCAxios from '../../until/LoginCheckAxios'
-import {Table, Button, Checkbox,Select} from 'antd'
+import {Table, Button, Checkbox,Select,Input} from 'antd'
 import {getConfig} from '../../until/Tool'
 
 export default class SettingUserManage extends React.Component {
@@ -12,6 +12,7 @@ export default class SettingUserManage extends React.Component {
             pagination: {},
             page_no: 1,
             power_select_option:[],
+            acount_search:null,//对账号搜索
         };
         //获取用户列表
         this.getList = () => this._getList();
@@ -25,6 +26,10 @@ export default class SettingUserManage extends React.Component {
         this.getPowerList = ()=>this._getPowerList();
         //设置角色权限
         this.setPowerRole = (power_role,member_info)=>this._setPowerRole(power_role,member_info);
+        //设置搜索内容
+        this.setSearch = (e,key) => this._setSearch(e,key);
+        //搜搜
+        this.search = () => this._search();
     }
 
     componentDidMount() {
@@ -35,17 +40,31 @@ export default class SettingUserManage extends React.Component {
     _setPage(pagination) {
         this.setState({page_no: pagination.current}, this.getList);
     }
-
+    _setSearch(e,key){
+        const value = e.target.value;
+        this.setState(()=>({
+            [key]:value
+        }));
+    }
+    _search(){
+        this.setState({
+            page_no:1
+        },this.getList)
+    }
     _getList() {
         const url = getConfig('request_get_user_list');
         LCAxios({
             url,
             type: "POST",
-            post_params: {page_no: this.state.page_no},
+            post_params: {
+                page_no: this.state.page_no,
+                acount_search:this.state.acount_search,
+            },
             success: response => {
                 if (response.data.code == 200) {
                     const list = response.data.data.list;
                     const total = response.data.data.total;
+                    const page_no = response.data.data.page_no;
                     let data = [];
                     const _this = this;
                     //组装table插件所需要的数据
@@ -64,6 +83,7 @@ export default class SettingUserManage extends React.Component {
                     //设置页数
                     const pagination = {...this.state.pagination};
                     pagination.total = total;
+                    pagination.current = page_no;
                     this.setState({
                         data,
                         pagination
@@ -221,7 +241,14 @@ export default class SettingUserManage extends React.Component {
         ];
         return (
             <div>
+                <div className="margin-t-5">
+                    <span className="margin-l-5">
+                        账号:<Input value={this.state.acount_search} onChange={(e)=>this.setSearch(e,'acount_search')} size="small" style={{width:80}}/>
+                    </span>
+                    <Button size="small" onClick={this.search} icon="search" type="primary" className="margin-l-50">搜索</Button>
+                </div>
                 <Table
+                    className="margin-t-5"
                     columns={columns}
                     dataSource={this.state.data}
                     pagination={this.state.pagination}
