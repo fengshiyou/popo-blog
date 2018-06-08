@@ -27,7 +27,7 @@ export default class Comment extends React.Component {
         };
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params,
             success: response => {
                 if (response.data.code == 200) {//保存成功

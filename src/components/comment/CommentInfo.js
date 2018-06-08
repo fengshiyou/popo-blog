@@ -4,7 +4,7 @@ import axios from 'axios'
 import {Icon, Input, Button, Pagination} from 'antd'
 import HighLight from 'highlight.js'
 import "../../css/content/Content.css"
-import {getConfig} from '../../until/Tool'
+import {getConfig,myAxios} from '../../until/Tool'
 import LCAxios from '../../until/LoginCheckAxios'
 import ReplyInfo from "./ReplyInfo";
 
@@ -85,7 +85,7 @@ export default class CommentInfo extends React.Component {
         };
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params,
             success: response => {
                 if (response.data.code == 200) {//保存成功
@@ -134,7 +134,7 @@ export default class CommentInfo extends React.Component {
         };
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params,
             success: response => {
                 if (response.data.code == 200) {//保存成功
@@ -178,8 +178,10 @@ export default class CommentInfo extends React.Component {
 
     _getReplyList() {
         const url = getConfig("request_get_reply_list") + "?comment_id=" + this.props.comment_id + "&page_no=" + this.state.page_no;
-        axios.get(url).then(
-            response => {
+        myAxios({
+            url,
+            type:'get',
+            successCallBack:response => {
                 let temp = [];
                 //当前页数
                 const page_no = response.data.data['page_no'];
@@ -212,7 +214,7 @@ export default class CommentInfo extends React.Component {
                 const page = <Pagination size="small" showQuickJumper defaultCurrent={response.data.data.page_no} total={response.data.data.total} defaultPageSize={response.data.data.per_page} onChange={this.setPageNo}/>
                 this.setState({page})
             }
-        ).catch();
+        });
     }
 
     render() {

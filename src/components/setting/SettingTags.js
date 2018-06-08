@@ -43,7 +43,7 @@ class SettingTags extends React.Component {
         const url = getConfig('request_edit_tag');
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params: {
                 id: this.state.edit_tag_id,
                 color:this.state.edit_tag_color,
@@ -68,7 +68,7 @@ class SettingTags extends React.Component {
         const url = getConfig('request_del_tag');
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params: {id: this.state.edit_tag_id},
             success: response => {
                 if (response.data.code == 200) {

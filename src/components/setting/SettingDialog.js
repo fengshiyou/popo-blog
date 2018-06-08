@@ -44,7 +44,7 @@ export default class SettingDialog extends React.Component {
                 url = getConfig('request_add_power_role');
                 LCAxios({
                     url,
-                    type: "post",
+                    type: "POST",
                     post_params: {name: this.state.new_power_role_name},
                     success: response => {
                         if (response.data.code == 200) {
@@ -66,7 +66,7 @@ export default class SettingDialog extends React.Component {
                 url = getConfig('request_add_power_url');
                 LCAxios({
                     url,
-                    type: "post",
+                    type: "POST",
                     post_params: {name: this.state.new_power_url_name,url:this.state.new_power_url},
                     success: response => {
                         if (response.data.code == 200) {
@@ -87,7 +87,7 @@ export default class SettingDialog extends React.Component {
                 url = getConfig('request_del_power_role');
                 LCAxios({
                     url,
-                    type: "post",
+                    type: "POST",
                     post_params: {id: this.props.info.id},
                     success: response => {
                         if (response.data.code == 200) {
@@ -107,7 +107,7 @@ export default class SettingDialog extends React.Component {
                 url = getConfig('request_del_power_url');
                 LCAxios({
                     url,
-                    type: "post",
+                    type: "POST",
                     post_params: {id: this.props.info.id},
                     success: response => {
                         if (response.data.code == 200) {

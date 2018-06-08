@@ -1,16 +1,18 @@
 import axios from 'axios'
-import {getConfig} from '../until/Tool'
+import {getConfig,myAxios} from '../until/Tool'
 
 function fetch(uid) {
     return (dispatch) => {
         //请求中
-        dispatch({type: "REQUEST_USER_DETAIL"})
+        dispatch({type: "REQUEST_USER_DETAIL"});
         const url = getConfig("request_get_member_info_detail") + "?uid=" + uid;
-        axios.get(url).then(
-            response => {
+        myAxios({
+            url,
+            type:'get',
+            successCallBack:  response => {
                 dispatch({type: "SERVER_USER_DETAIL", items:response.data.data})
             }
-        ).catch()
+        });
     }
 }
 

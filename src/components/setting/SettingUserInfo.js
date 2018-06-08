@@ -23,6 +23,7 @@ class SettingUserInfo extends React.Component {
             link3: null,
             link3_des: null,
             motto: null,
+            login:null,
         };
         //保存用户信息
         this.editUserInfo = () => this._editUserInfo();
@@ -77,10 +78,12 @@ class SettingUserInfo extends React.Component {
         const url = getConfig('request_edit_user_info');
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params: this.state,
             success: response => {
+
                 if (response.data.code == 200) {//保存成功
+                    alert("保存成功");
                     //设置用户信息
                     dispatch({type: "EDIT_USER_DETAIL", items: response.data.data});
                 } else {//保存失败
@@ -177,6 +180,7 @@ class SettingUserInfo extends React.Component {
                 <div className="user-info-item text-center">
                     <Button type='primary' onClick={this.editUserInfo}>保存</Button>
                 </div>
+                {this.state.login}
             </div>
         )
     }

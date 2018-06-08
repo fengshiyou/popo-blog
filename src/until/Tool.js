@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const getHeightByRadio = (radio = 1) => {
     //获取浏览器高度
     const client_height = document.documentElement.clientHeight || document.body.clientHeight;
@@ -36,9 +38,9 @@ export function getUrlParam(key) {
 export function getUrlParams() {
     let return_params = {};
     let prams_str = window.location.href.replace(window.location.origin, '').split('?')[1];
-    if(prams_str){
+    if (prams_str) {
         prams_str = prams_str.split("&");
-        prams_str.map(function (value,key,arr) {
+        prams_str.map(function (value, key, arr) {
             const info = value.split("=");
             return_params[info[0]] = info[1];
         });
@@ -46,4 +48,22 @@ export function getUrlParams() {
 
 
     return return_params;
+}
+
+//axios
+export function myAxios({...args}) {
+    let {url, successCallBack, type, params} = args;
+    axios({
+        url,
+        method: type,
+        data: params,
+        headers: {
+            token: localStorage.getItem("token"),
+            loginUid: localStorage.getItem("uid"),
+        }
+    }).then(
+        response => {
+            successCallBack(response);
+        }
+    ).catch();
 }

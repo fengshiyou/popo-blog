@@ -23,7 +23,7 @@ export default class SettingLogManage extends React.Component{
         const url = getConfig('request_get_log_list');
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params: {page_no: this.state.page_no},
             success: response => {
                 if (response.data.code == 200) {

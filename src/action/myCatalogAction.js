@@ -1,5 +1,4 @@
-import axios from 'axios'
-import {getConfig} from '../until/Tool'
+import {getConfig,myAxios} from '../until/Tool'
 
 //请求后台数据
 function fetch() {
@@ -8,14 +7,13 @@ function fetch() {
         dispatch({type: "REQUEST_CATALOGLIST"})
         const url = getConfig("request_get_my_catalog");
         let post_params = {};
-        post_params.login_uid = localStorage.getItem('uid');
-        post_params.token = localStorage.getItem('token');
-
-        axios.post(url, post_params).then(
-            response => {
+        myAxios({
+            url,
+            type:'post',
+            successCallBack:response => {
                 dispatch({type: "SERVER_CATALOGLIST", items: response.data.data})
             }
-        ).catch()
+        });
     }
 }
 

@@ -1,20 +1,22 @@
 import axios from 'axios'
-import {getConfig} from '../until/Tool'
+import {getConfig,myAxios} from '../until/Tool'
 
 function fetch() {
     return dispatch => {
         //请求中
-        dispatch({type: "REQUEST_TAGS"})
-        const url = getConfig("request_get_tags")
-        axios.get(url).then(
-            response => {
+        dispatch({type: "REQUEST_TAGS"});
+        const url = getConfig("request_get_tags");
+        myAxios({
+            url,
+            type:'get',
+            successCallBack: response => {
                 let items = [];
                 response.data.data.map(function(val,key,arr){
                     items[val.id] = val;
                 });
                 dispatch({type: "SERVER_TAGS", items})
             }
-        ).catch()
+        });
     }
 }
 //强制更新数据

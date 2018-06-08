@@ -3,7 +3,7 @@ import BlogListItem from './BlogListItem'
 import axios from 'axios'
 import {Pagination, Button} from 'antd'
 import NeadLoginButton from '../login/NeadLoginButton'
-import {getConfig} from "../../until/Tool"
+import {getConfig, myAxios} from "../../until/Tool"
 
 export default class BlogList extends React.Component {
     constructor() {
@@ -57,8 +57,10 @@ export default class BlogList extends React.Component {
         }
 
         const blog_item_list = [];
-        axios.get(url).then(
-            response => {
+        myAxios({
+            url,
+            type:'get',
+            successCallBack: response => {
                 const response_list = response.data.data.list;
                 const blog_type = this.props.blog_type;
                 if (response_list.length > 0) {
@@ -99,7 +101,7 @@ export default class BlogList extends React.Component {
                 //回到顶部
                 window.scrollTo(0, 0);
             }
-        ).catch()
+        });
     }
 
 

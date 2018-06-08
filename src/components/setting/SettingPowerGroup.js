@@ -116,7 +116,7 @@ export default class SettingPowerGroup extends React.Component {
         const url = getConfig('request_set_power');
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params: this.state.data[index],
             success: response => {
                 if (response.data.code == 200) {//保存成功

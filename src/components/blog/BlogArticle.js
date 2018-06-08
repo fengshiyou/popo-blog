@@ -2,8 +2,7 @@ import React from 'react'
 import Content from '../article/Content'
 import Menu from '../article/Menu'
 import {Row, Col, Affix} from 'antd'
-import axios from 'axios'
-import {getHeightByRadio, getConfig} from '../../until/Tool'
+import {getHeightByRadio, getConfig,myAxios} from '../../until/Tool'
 
 export default class BlogArticle extends React.Component {
     constructor() {
@@ -16,14 +15,17 @@ export default class BlogArticle extends React.Component {
         //获取content_id
         const content_id = this.props.match.params.id;
         const url = getConfig("request_blog_article");
-        axios.post(
-            url,{content_id}
-        ).then(
-            response => {
+        myAxios({
+            url,
+            params:{
+                content_id
+            },
+            type:'post',
+            successCallBack:response => {
                 this.setState({content: <Content id={content_id} content={response.data.data.content} title={response.data.data.title} created_at={response.data.data.created_at}/>})
                 this.setState({menu_list: this.getMenuList(response.data.data.content)})
             }
-        ).catch(e => console.log(e))
+        });
     }
 
     getMenuList(content) {

@@ -40,7 +40,7 @@ export default class SettingUserManage extends React.Component {
         const url = getConfig('request_get_user_list');
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params: {page_no: this.state.page_no},
             success: response => {
                 if (response.data.code == 200) {
@@ -112,7 +112,7 @@ export default class SettingUserManage extends React.Component {
         const url = getConfig('request_reset_user_passwd');
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params: {uid},
             success: response => {
                 if (response.data.code == 200) {
@@ -130,7 +130,7 @@ export default class SettingUserManage extends React.Component {
         const url = getConfig('request_set_user_enabled');
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params: {uid:member_info.uid,enabled:checked},
             success: response => {
                 if (response.data.code == 200) {
@@ -148,7 +148,7 @@ export default class SettingUserManage extends React.Component {
         const url = getConfig('request_set_user_power_role');
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params: {uid:member_info.uid,power_role_id:power_role},
             success: response => {
                 if (response.data.code == 200) {

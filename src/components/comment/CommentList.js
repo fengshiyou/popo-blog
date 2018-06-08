@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {Pagination} from 'antd'
-import {getConfig} from '../../until/Tool'
+import {getConfig,myAxios} from '../../until/Tool'
 import CommentInfo from "./CommentInfo";
 
 export default class CommentList extends React.Component {
@@ -25,8 +25,10 @@ export default class CommentList extends React.Component {
 
     _getCommentList() {
         const url = getConfig('request_get_comment_list') + "?comment_type=" + this.props.comment_type + "&id=" + this.state.id + "&page_no=" + this.state.page_no;
-        axios.get(url).then(
-            response => {
+        myAxios({
+            url,
+            type:'get',
+            successCallBack:response => {
                 let temp = [];
                 //当前页数
                 const page_no = response.data.data['page_no'];
@@ -46,7 +48,7 @@ export default class CommentList extends React.Component {
                 const page = <Pagination showQuickJumper defaultCurrent={response.data.data.page_no} total={response.data.data.total} defaultPageSize={response.data.data.per_page} onChange={this.setPageNo}/>
                 this.setState({page})
             }
-        ).catch()
+        });
     }
     _setPageNo(page_no) {
         this.setState({page_no}, this.getCommentList);

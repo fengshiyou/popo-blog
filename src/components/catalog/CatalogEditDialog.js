@@ -30,7 +30,7 @@ export default class CatalogEditDialog extends React.Component {
                 url = getConfig('request_rename_catalog');
                 LCAxios({
                     url,
-                    type: "post",
+                    type: "POST",
                     post_params: {
                         catalog_id: this.props.catalog_id,
                         new_name: this.state.new_name,
@@ -55,7 +55,7 @@ export default class CatalogEditDialog extends React.Component {
                 url = getConfig('request_add_catalog');
                 LCAxios({
                     url,
-                    type: "post",
+                    type: "POST",
                     post_params: {
                         catalog_id: this.props.catalog_id,
                         catalog_name: this.state.new_name,
@@ -80,7 +80,7 @@ export default class CatalogEditDialog extends React.Component {
                 url = getConfig('request_del_catalog');
                 LCAxios({
                     url,
-                    type: "post",
+                    type: "POST",
                     post_params: {
                         catalog_id: this.props.catalog_id,
                     },

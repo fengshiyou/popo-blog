@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import CatalogEditDialog from './CatalogEditDialog'
 import {getMyCatalog, mapStateToProps, initMyCatalog} from '../../action/myCatalogAction'
-import {getConfig} from "../../until/Tool";
+import {getConfig,myAxios} from "../../until/Tool";
 
 
 class CatalogMenu extends React.Component {
@@ -79,11 +79,13 @@ class CatalogMenu extends React.Component {
         } else {
             const url = getConfig('request_get_catalog') + "?uid=" + this.props.blog_type;
             //他人博客  去后台获取
-            axios.get(url).then(
-                response => {
+            myAxios({
+                url,
+                type:'get',
+                successCallBack:response => {
                     this.setState({list: response.data.data})
                 }
-            ).catch()
+            });
         }
     }
     componentWillReceiveProps(newProps) {
@@ -95,11 +97,13 @@ class CatalogMenu extends React.Component {
         } else {
             const url = getConfig('request_get_catalog') + "?uid=" + newProps.blog_type;
             //他人博客  去后台获取
-            axios.get(url).then(
-                response => {
+            myAxios({
+                url,
+                type:'get',
+                successCallBack:response => {
                     this.setState({list: response.data.data})
                 }
-            ).catch()
+            });
         }
     }
 

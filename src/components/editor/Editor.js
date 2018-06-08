@@ -8,7 +8,6 @@ import 'simplemde/debug/simplemde.css'
 import {Button, Input} from 'antd'
 import {getConfig, getUrlParam} from '../../until/Tool'
 import LCAxios from '../../until/LoginCheckAxios'
-import axios from 'axios'
 import '../../css/editor/EditorButton.css'
 import '../../css/editor/Preview.css'
 import '../../css/editor/Editor.css'
@@ -62,7 +61,7 @@ export default class Editor extends React.Component {
         };
         LCAxios({
             url,
-            type: "post",
+            type: "POST",
             post_params,
             success: response => {
                 if(response.data.code == 200){//保存成功
@@ -107,7 +106,7 @@ export default class Editor extends React.Component {
         if (blog_id) {
             LCAxios({
                 url,
-                type: "post",
+                type: "POST",
                 post_params: {blog_id},
                 success: response => {
                     if (response.data.code !== 200) {
