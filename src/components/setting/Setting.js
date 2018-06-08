@@ -7,6 +7,7 @@ import SettingUserInfo from "./SettingUserInfo";
 import SettingPowerGroup from "./SettingPowerGroup";
 import SettingTags from "./SettingTags";
 import SettingUserManage from "./SettingUserManage";
+import SettingLogManage from "./SettingLogManage";
 const { Content } = Layout;
 export default class Setting extends React.Component {
     render() {
@@ -20,6 +21,7 @@ export default class Setting extends React.Component {
                         <Route path={`/home/setting/PowerGroup/`} component={SettingPowerGroup}/>
                         <Route path={`/home/setting/tags/`} component={SettingTags}/>
                         <Route path={`/home/setting/userManage/`} component={SettingUserManage}/>
+                        <Route path={`/home/setting/log/`} component={SettingLogManage}/>
                     </Content>
                 </Layout>
 

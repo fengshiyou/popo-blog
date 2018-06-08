@@ -31,3 +31,4 @@ export const local_request_get_user_list = "http://192.168.150.149:8090/api/user
 export const local_request_reset_user_passwd = "http://192.168.150.149:8090/api/user/resetPasswd";
 export const local_request_set_user_enabled = "http://192.168.150.149:8090/api/user/setEnabled";
 export const local_request_set_user_power_role = "http://192.168.150.149:8090/api/user/setPowerRole";
+export const local_request_get_log_list = "http://192.168.150.149:8090/api/log/getList";
