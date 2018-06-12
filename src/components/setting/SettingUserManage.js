@@ -120,7 +120,7 @@ export default class SettingUserManage extends React.Component {
                     });
                     this.setState({power_select_option})
                 }else{
-                    elert(response.data.msg)
+                    alert(response.data.msg)
                 }
             },
             failSet: (login_node) => {
@@ -188,7 +188,6 @@ export default class SettingUserManage extends React.Component {
                 title: '账号',
                 dataIndex: 'acount',
                 key: 'name',
-                render: text => <a href="#">{text}</a>,
             },
             {
                 title: '创建时间',

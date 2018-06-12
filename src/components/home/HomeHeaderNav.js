@@ -13,7 +13,6 @@ export default class HomeHeaderNav extends React.Component {
             home_header_nav = (
                 <div>
                     <Link to={`/home/blog/home`} className={`home-header-nav-item text-center ${this.props.path_name =="/home/blog/home"? 'home-header-nav-item-active':''}`}>博客大厅</Link>
-                    <Link to="/" className="home-header-nav-item text-center">关于</Link>
                     <NeadLoginButton className={`home-header-nav-item text-center ${this.props.path_name == "/home/blog/myblog" ? 'home-header-nav-item-active' : ''}`} component={HomeHeaderNavButton} context="我的博客" link_to={`/home/blog/myblog`}/>
                 </div>
             );
@@ -22,7 +21,6 @@ export default class HomeHeaderNav extends React.Component {
                 <div>
                     <Link to={`/${this.props.to_uid}/`} className={`home-header-nav-item text-center ${this.props.path_name == `/${this.props.to_uid}/` ? 'home-header-nav-item-active' : ''}`}>个人主页</Link>
                     <Link to={`/${this.props.to_uid}/blog/home`} className={`home-header-nav-item text-center ${this.props.path_name == `/${this.props.to_uid}/blog/home` ? 'home-header-nav-item-active' : ''}`}>博客大厅</Link>
-                    <Link to="/" className="home-header-nav-item text-center">关于</Link>
                     <Link to={`/${this.props.to_uid}/comment`} className={`home-header-nav-item text-center ${this.props.path_name == `/${this.props.to_uid}/comment` ? 'home-header-nav-item-active' : ''}`}>留言版</Link>
                     <NeadLoginButton className={`home-header-nav-item text-center ${this.props.path_name == `/home/blog/myblog` ? 'home-header-nav-item-active' : ''}`} component={HomeHeaderNavButton} context="我的博客" link_to={`/home/blog/myblog`}/>
                     <Link to={`/home/setting/userInfo`} className={`home-header-nav-item text-center ${this.props.path_name.indexOf('/home/setting/') == 0 ? 'home-header-nav-item-active' : ''}`}>个人设置</Link>

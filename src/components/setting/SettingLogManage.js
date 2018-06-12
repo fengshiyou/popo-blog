@@ -95,7 +95,6 @@ export default class SettingLogManage extends React.Component{
                 title: '账号',
                 dataIndex: 'acount',
                 key: 'name',
-                render: text => <a href="#">{text}</a>,
             },
             {
                 title: '客户端IP',
