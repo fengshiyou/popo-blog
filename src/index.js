@@ -13,7 +13,7 @@ import BlogArticle from "./components/blog/BlogArticle";
 import BlogListBody from "./components/blog/BlogListBody";
 import Setting from "./components/setting/Setting";
 import About from "./components/home/About";
-import NeadLoginButton from "./components/login/NeadLoginButton"
+import NeadLoginButton from "./components/login/NeadLoginButton";
 
 import "./css/base/Body.css"
 import "./css/base/Base.css"
