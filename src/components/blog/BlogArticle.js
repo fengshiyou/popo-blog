@@ -3,8 +3,10 @@ import Content from '../article/Content'
 import Menu from '../article/Menu'
 import {Row, Col, Affix} from 'antd'
 import {getHeightByRadio, getConfig,myAxios} from '../../until/Tool'
+import {withRouter} from 'react-router-dom'
 
-export default class BlogArticle extends React.Component {
+
+class BlogArticle extends React.Component {
     constructor() {
         super();
         //@todo 正在加载中的设计
@@ -58,3 +60,4 @@ export default class BlogArticle extends React.Component {
         )
     }
 }
+export default withRouter(BlogArticle)

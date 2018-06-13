@@ -4,15 +4,52 @@ import {Provider} from 'react-redux'
 import {HashRouter, Route} from "react-router-dom"
 import HomeHeader from './components/home/HomeHeader'
 import HomeFooter from './components/home/HomeFooter'
-import HomeBody from './components/home/HomeBody'
-import BlogBody from './components/blog/BlogBody'
-import Eidtor from './components/editor/Editor'
+
 import PrivateRoute from './components/route/PrivateRoute'
-import CommentToUser from "./components/comment/CommentToUser";
-import BlogArticle from "./components/blog/BlogArticle";
-import BlogListBody from "./components/blog/BlogListBody";
-import Setting from "./components/setting/Setting";
+//@todo 按需加载   日志记起
+import EidtorCom from 'bundle-loader?lazy&name=app-[name]!./components/editor/Editor'
+const Eidtor = () => (
+    <Bundle load={EidtorCom}>
+        {(Eidtor) => <Eidtor />}
+    </Bundle>
+);
+
+import HomeBodyCom from 'bundle-loader?lazy&name=app-[name]!./components/home/HomeBody'
+const HomeBody = () => (
+    <Bundle load={HomeBodyCom}>
+        {(HomeBody) => <HomeBody />}
+    </Bundle>
+);
+
+import CommentToUserCom from "bundle-loader?lazy&name=app-[name]!./components/comment/CommentToUser";
+const CommentToUser = () => (
+    <Bundle load={CommentToUserCom}>
+        {(CommentToUser) => <CommentToUser />}
+    </Bundle>
+);
+import BlogArticleCom from "bundle-loader?lazy&name=app-[name]!./components/blog/BlogArticle";
+const BlogArticle = () => (
+    <Bundle load={BlogArticleCom}>
+        {(BlogArticle) => <BlogArticle />}
+    </Bundle>
+);
+import BlogListBodyCom from "bundle-loader?lazy&name=app-[name]!./components/blog/BlogListBody";
+const BlogListBody = () => (
+    <Bundle load={BlogListBodyCom}>
+        {(BlogListBody) => <BlogListBody />}
+    </Bundle>
+);
+
+import SettingCom from "bundle-loader?lazy&name=app-[name]!./components/setting/Setting";
+const Setting = () => (
+    <Bundle load={SettingCom}>
+        {(Setting) => <Setting />}
+    </Bundle>
+);
+
 import About from "./components/home/About";
+import Bundle from './bundle'
+
 import NeadLoginButton from "./components/login/NeadLoginButton";
 
 import "./css/base/Body.css"
@@ -21,7 +58,6 @@ import "./css/base/Base.css"
 import configureStore from "./store/store"
 
 const store = configureStore()
-
 
 ReactDOM.render(
     <Provider store={store}>

@@ -1,8 +1,9 @@
 import React from 'react'
 import UserDetail from './UserDetail'
 import {getHeightByRadio} from '../../until/Tool'
+import {withRouter} from 'react-router-dom'
 
-export default class HomeBody extends React.Component {
+class HomeBody extends React.Component {
 
     render() {
         return (
@@ -12,3 +13,4 @@ export default class HomeBody extends React.Component {
         )
     }
 }
+export default withRouter(HomeBody)

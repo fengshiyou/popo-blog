@@ -9,8 +9,9 @@ import SettingTags from "./SettingTags";
 import SettingUserManage from "./SettingUserManage";
 import SettingLogManage from "./SettingLogManage";
 import SettingWebUrl from "./SettingWebUrl";
+import {withRouter} from 'react-router-dom'
 const { Content } = Layout;
-export default class Setting extends React.Component {
+class Setting extends React.Component {
     render() {
         const type = this.props.match.params.type;
         return (
@@ -31,3 +32,4 @@ export default class Setting extends React.Component {
         )
     }
 }
+export default withRouter(Setting)

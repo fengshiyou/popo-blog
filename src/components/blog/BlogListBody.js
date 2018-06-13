@@ -5,8 +5,10 @@ import {Row, Col} from 'antd'
 import {Provider} from 'react-redux'
 import {getHeightByRadio} from '../../until/Tool'
 import BlogLIstRightMenu from "./BlogLIstRightMenu";
+import {withRouter} from 'react-router-dom'
 
-export default class BlogListBody extends React.Component {
+
+class BlogListBody extends React.Component {
     render() {
         const blog_type = this.props.match.params.blog_type;
         const to_uid = this.props.match.params.to_uid;
@@ -31,3 +33,4 @@ export default class BlogListBody extends React.Component {
         )
     }
 }
+export default withRouter(BlogListBody)

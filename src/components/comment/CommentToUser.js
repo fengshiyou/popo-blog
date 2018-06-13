@@ -1,8 +1,10 @@
 import React from 'react'
 import Comment from "./Comment";
 import {getHeightByRadio} from '../../until/Tool'
+import {withRouter} from 'react-router-dom'
 
-export default class CommentToUser extends React.Component {
+
+class CommentToUser extends React.Component {
     render() {
         const to_uid = this.props.match.params.to_uid;
         const uid = to_uid != "home" ? this.props.match.params.to_uid : localStorage.getItem('uid');
@@ -13,3 +15,4 @@ export default class CommentToUser extends React.Component {
         )
     }
 }
+export default withRouter(CommentToUser)
