@@ -20,13 +20,22 @@ module.exports = {
     entry: getEntry(),
     output: {
         path: BUILD_PATH,
-        publicPath: '/build/test/', //这个特别重要   要不不能识别热打包路径
-        filename: 'js/[name].bundle.js', //打包之后输出的文件名  js(目录)[name]（entry中的名字）[hash]（就是随机一个hash码）
-        chunkFilename: '[name].[chunkhash:5].chunk.js',
+        publicPath: '/build/', //这个特别重要   要不不能识别热打包路径
+        filename: 'js/test/[name].bundle.js', //打包之后输出的文件名  js(目录)[name]（entry中的名字）[hash]（就是随机一个hash码）
+        chunkFilename: 'js/test/[name].[chunkhash:8].chunk.js',
     },
     //babel
     module: {
         rules: [
+            {
+                test: /\.build\.js$/,
+                loader: 'bundle-loader',
+                include:path.join(__dirname, 'src'),
+                options: {
+                    lazy: true,
+                    name: '[name]'
+                }
+            },
             //css babel
             {
                 test: /\.(css|scss|less)$/,
