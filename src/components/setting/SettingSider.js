@@ -109,6 +109,7 @@ export default class SettingSider extends React.Component {
                     </Menu.Item>
                     {this.state.url_list}
                 </Menu>
+                {this.state.login}
             </Sider>
         )
     }
