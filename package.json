@@ -6,9 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=production webpack-dev-server --open --hot --config webpack.dev.config.js",
-    "pro": "cross-env NODE_ENV=production webpack-dev-server --open --hot",
+    "pro": "better-npm-run pro",
     "build-dev": "cross-env NODE_ENV=production webpack --progress --config webpack.dev.config.js --hide-modules",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "betterScripts": {
+    "pro": {
+      "command": "cross-env NODE_ENV=production webpack-dev-server --open --hot",
+      "env": {
+        "NODE_ENV": "123123"
+      }
+    }
   },
   "repository": {
     "type": "git",
