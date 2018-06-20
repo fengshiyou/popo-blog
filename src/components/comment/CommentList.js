@@ -76,7 +76,7 @@ export default class CommentList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="margin-b-15 margin-l-5">
                 {this.state.list}
                 {this.state.page}
             </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
-import {HashRouter, Route} from "react-router-dom"
+import {HashRouter, Route,Redirect} from "react-router-dom"
 import HomeHeader from './components/home/HomeHeader'
 import HomeFooter from './components/home/HomeFooter'
 
@@ -72,6 +72,8 @@ ReactDOM.render(
                 <Route path={`/home/about`} component={About}/>
                 <PrivateRoute path={`/home/editor`} component={Eidtor}/>
                 <Route path={`/:to_uid/`} component={HomeFooter}/>
+                {/*@todo Redirect的博客 根目录跳转*/}
+                <Route exact path="/" render={()=><Redirect to="/home/blog/home"/>}/>
             </div>
         </HashRouter>
     </Provider>,

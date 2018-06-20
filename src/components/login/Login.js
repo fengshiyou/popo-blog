@@ -1,8 +1,9 @@
 import React from 'react'
-import {Button, Modal, Input, Tabs} from 'antd'
+import {Button, Modal, Input, Tabs, Icon} from 'antd'
 import {getConfig} from '../../until/Tool'
 import axios from 'axios'
 import {withRouter} from "react-router-dom";
+
 //@todo 登陆框是否可ESC关闭
 class Login extends React.Component {
     constructor() {
@@ -10,11 +11,11 @@ class Login extends React.Component {
         this.state = {
             visible: true,
             mask_closable: true,//是否可点击蒙板关闭对话框
-            acount:"",//账号
-            passwd:"",//密码
-            passwd_check:"",//密码确认
-            error_msg:null,//错误信息
-            type:1 //类型 1登陆 2注册
+            acount: "",//账号
+            passwd: "",//密码
+            passwd_check: "",//密码确认
+            error_msg: null,//错误信息
+            type: 1 //类型 1登陆 2注册
         }
         this.showModal = () => this._showModal()
         //确认
@@ -24,40 +25,47 @@ class Login extends React.Component {
         //关闭对话框
         this.close = () => this._close()
         //设置账号
-        this.setAcount = (e)=> this._setAcount(e)
+        this.setAcount = (e) => this._setAcount(e)
         //设置密码
-        this.setPasswd = (e)=> this._setPasswd(e)
+        this.setPasswd = (e) => this._setPasswd(e)
         //设置确认密码
         this.setPasswdCheck = (e) => this._setPasswdCheck(e)
         //设置类型  1登陆  2注册
         this.setType = (value) => this._setType(value)
     }
-    _setType(value){
-        this.setState({type:value});
-        this.setState({error_msg:null});
+
+    _setType(value) {
+        this.setState({type: value});
+        this.setState({error_msg: null});
     }
-    _setPasswdCheck(e){
-        this.setState({passwd_check:e.target.value});
-        this.setState({error_msg:null});
+
+    _setPasswdCheck(e) {
+        this.setState({passwd_check: e.target.value});
+        this.setState({error_msg: null});
     }
-    _setAcount(e){
-        this.setState({acount:e.target.value});
-        this.setState({error_msg:null});
+
+    _setAcount(e) {
+        this.setState({acount: e.target.value});
+        this.setState({error_msg: null});
     }
-    _setPasswd(e){
-        this.setState({passwd:e.target.value});
-        this.setState({error_msg:null});
+
+    _setPasswd(e) {
+        this.setState({passwd: e.target.value});
+        this.setState({error_msg: null});
     }
+
     componentDidMount() {
         this.setState({
             visible: this.props.visible,
             mask_closable: this.props.mask_closable
         });
     }
-    componentWillUnmount(){
+
+    componentWillUnmount() {
         console.log("销毁了 登陆")
     }
-    _close(){
+
+    _close() {
         if (this.props.close) {
             this.props.close()
         }
@@ -71,18 +79,18 @@ class Login extends React.Component {
 
     _handleOk(e) {
         //检查表单元素
-        if(!this.checkParams()){
-            return ;
+        if (!this.checkParams()) {
+            return;
         }
         //登陆参数
         let params = {
-            acount:this.state.acount,
-            passwd:this.state.passwd
+            acount: this.state.acount,
+            passwd: this.state.passwd
         };
         //登陆url
         let url = getConfig('request_login');
         //注册参数
-        if(this.state.type == 2){
+        if (this.state.type == 2) {
             params.passwd_check = this.state.passwd_check;
             //注册url
             url = getConfig('request_register');
@@ -91,25 +99,25 @@ class Login extends React.Component {
         axios.post(
             url,
             params
-            ).then(
-            response=>{
-                if(response.data.code != 200){
-                    this.setState({error_msg:response.data.msg});
+        ).then(
+            response => {
+                if (response.data.code != 200) {
+                    this.setState({error_msg: response.data.msg});
 
-                }else{
+                } else {
                     this.setState({
                         visible: false,
                     });
                     //设置localStorage
-                    localStorage.setItem('uid',response.data.data.uid);
-                    localStorage.setItem('token',response.data.data.token);
-                    localStorage.setItem('acount',response.data.data.acount);
+                    localStorage.setItem('uid', response.data.data.uid);
+                    localStorage.setItem('token', response.data.data.token);
+                    localStorage.setItem('acount', response.data.data.acount);
                     //登陆成功后的回调
-                    if(this.props.login_call_back){
-                        this.props.login_call_back(localStorage.getItem('uid'),localStorage.getItem('token'));
+                    if (this.props.login_call_back) {
+                        this.props.login_call_back(localStorage.getItem('uid'), localStorage.getItem('token'));
                     }
                     //登陆成功后跳转页面
-                    if(this.props.login_redirect){
+                    if (this.props.login_redirect) {
                         this.props.history.push(this.props.login_redirect)
                     }
                 }
@@ -122,15 +130,16 @@ class Login extends React.Component {
             visible: false,
         });
     }
-    checkParams(){
-        if(this.state.acount.length < 2 || this.state.acount.length > 30){
-            this.setState({error_msg:"账号必须在2到30个字符之间"});
+
+    checkParams() {
+        if (this.state.acount.length < 2 || this.state.acount.length > 30) {
+            this.setState({error_msg: "账号必须在2到30个字符之间"});
             return false;
-        }else if(this.state.passwd.length < 2 || this.state.passwd.length > 18){
-            this.setState({error_msg:"密码必须在2~18个字符之间"})
+        } else if (this.state.passwd.length < 2 || this.state.passwd.length > 18) {
+            this.setState({error_msg: "密码必须在2~18个字符之间"})
             return false;
-        }else if(this.state.type == 2 && this.state.passwd != this.state.passwd_check){
-            this.setState({error_msg:"两次密码输入不同，请检查"})
+        } else if (this.state.type == 2 && this.state.passwd != this.state.passwd_check) {
+            this.setState({error_msg: "两次密码输入不同，请检查"})
             return false;
         }
         return true;
@@ -157,19 +166,30 @@ class Login extends React.Component {
                 >
                     <Tabs defaultActiveKey="1" onChange={this.setType}>
                         <TabPane tab="登陆" key="1">
-                            <Input addonBefore="账号：" placeholder="请输入账号" onChange={this.setAcount} value={this.state.acount}/>
-                            <Input addonBefore="密码：" type="password" placeholder="请输入密码" onChange={this.setPasswd} value={this.state.passwd}/>
+                            <div className="margin-t-5">
+                                <Input prefix={<Icon type="user" />} addonBefore="账号：" placeholder="请输入账号" onChange={this.setAcount} value={this.state.acount}/>
+                            </div>
+                            <div className="margin-t-5">
+                                <Input prefix={<Icon type="lock" />} addonBefore="密码：" type="password" placeholder="请输入密码" onChange={this.setPasswd} value={this.state.passwd}/>
+                            </div>
                         </TabPane>
                         <TabPane tab="注册" key="2">
-                            <Input addonBefore="账号：" placeholder="请输入账号" onChange={this.setAcount} value={this.state.acount}/>
-                            <Input addonBefore="密码：" type="password" placeholder="请输入密码" onChange={this.setPasswd} value={this.state.passwd}/>
-                            <Input addonBefore="密码：" type="password" placeholder="请确认密码" onChange={this.setPasswdCheck} value={this.state.passwd_check}/>
+                            <div className="margin-t-5">
+                                <Input prefix={<Icon type="user" />} addonBefore="账号：" placeholder="请输入账号" onChange={this.setAcount} value={this.state.acount}/>
+                            </div>
+                            <div className="margin-t-5">
+                                <Input prefix={<Icon type="lock" />} addonBefore="密码：" type="password" placeholder="请输入密码" onChange={this.setPasswd} value={this.state.passwd}/>
+                            </div>
+                            <div className="margin-t-5">
+                                <Input prefix={<Icon type="lock" />} addonBefore="密码：" type="password" placeholder="请确认密码" onChange={this.setPasswdCheck} value={this.state.passwd_check}/>
+                            </div>
                         </TabPane>
                     </Tabs>
-                    <span style={{color:"red"}}>{this.state.error_msg}</span>
+                    <span style={{color: "red"}}>{this.state.error_msg}</span>
                 </Modal>
             </div>
         );
     }
 }
+
 export default withRouter(Login);

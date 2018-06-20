@@ -42,7 +42,9 @@ class TagsMenu extends React.Component {
                 <h1>标签</h1>
                 <span>{title}</span>
                 <hr/>
+                <div className="margin-b-15">
                 {tags}
+                </div>
             </div>
         )
     }

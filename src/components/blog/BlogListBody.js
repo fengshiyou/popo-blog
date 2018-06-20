@@ -22,7 +22,7 @@ class BlogListBody extends React.Component {
         return (
             <div style={{minHeight: getHeightByRadio()}} className="dark-gray-back">
                 <Row>
-                    <Col span={16} className="white-back margin-l-50 margin-t-50">
+                    <Col span={16} className="white-back margin-l-50 margin-t-50 margin-b-15">
                         <BlogList blog_type={blog_type} search={search} to_uid={to_uid}/>
                     </Col>
                     <Col span={5}>
