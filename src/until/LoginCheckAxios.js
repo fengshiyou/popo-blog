@@ -26,7 +26,7 @@ export default function loginCheckAxios({...params}) {
                             successCallBack:response => success(response)
                         });
                     };
-                    failSet(<Login visible={true} mask_closable={false} close={modal_close} params={params} login_call_back={loginCallBack}/>);
+                    failSet(<Login visible={true} close={modal_close} params={params} login_call_back={loginCallBack}/>);
                 } else if (response.data.msg == "nead_check") {//需要验证密码
                     //需要验证
                 }

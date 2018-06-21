@@ -57,7 +57,7 @@ class Login extends React.Component {
     componentDidMount() {
         this.setState({
             visible: this.props.visible,
-            mask_closable: this.props.mask_closable
+            mask_closable: this.props.mask_closable === undefined ? true : this.props.mask_closable,
         });
     }
 
@@ -126,7 +126,8 @@ class Login extends React.Component {
     }
 
     _handleCancel(e) {
-        if(!this.state.mask_closable){
+        console.log(this.state.mask_closable)
+        if (!this.state.mask_closable) {
             return;
         }
         this.setState({
@@ -170,21 +171,21 @@ class Login extends React.Component {
                     <Tabs defaultActiveKey="1" onChange={this.setType}>
                         <TabPane tab="登陆" key="1">
                             <div className="margin-t-5">
-                                <Input prefix={<Icon type="user" />} addonBefore="账号：" placeholder="请输入账号" onChange={this.setAcount} value={this.state.acount}/>
+                                <Input prefix={<Icon type="user"/>} addonBefore="账号：" placeholder="请输入账号" onChange={this.setAcount} value={this.state.acount}/>
                             </div>
                             <div className="margin-t-5">
-                                <Input prefix={<Icon type="lock" />} addonBefore="密码：" type="password" placeholder="请输入密码" onChange={this.setPasswd} value={this.state.passwd}/>
+                                <Input prefix={<Icon type="lock"/>} addonBefore="密码：" type="password" placeholder="请输入密码" onChange={this.setPasswd} value={this.state.passwd}/>
                             </div>
                         </TabPane>
                         <TabPane tab="注册" key="2">
                             <div className="margin-t-5">
-                                <Input prefix={<Icon type="user" />} addonBefore="账号：" placeholder="请输入账号" onChange={this.setAcount} value={this.state.acount}/>
+                                <Input prefix={<Icon type="user"/>} addonBefore="账号：" placeholder="请输入账号" onChange={this.setAcount} value={this.state.acount}/>
                             </div>
                             <div className="margin-t-5">
-                                <Input prefix={<Icon type="lock" />} addonBefore="密码：" type="password" placeholder="请输入密码" onChange={this.setPasswd} value={this.state.passwd}/>
+                                <Input prefix={<Icon type="lock"/>} addonBefore="密码：" type="password" placeholder="请输入密码" onChange={this.setPasswd} value={this.state.passwd}/>
                             </div>
                             <div className="margin-t-5">
-                                <Input prefix={<Icon type="lock" />} addonBefore="密码：" type="password" placeholder="请确认密码" onChange={this.setPasswdCheck} value={this.state.passwd_check}/>
+                                <Input prefix={<Icon type="lock"/>} addonBefore="密码：" type="password" placeholder="请确认密码" onChange={this.setPasswdCheck} value={this.state.passwd_check}/>
                             </div>
                         </TabPane>
                     </Tabs>

@@ -31,7 +31,7 @@ export default class HomeHeaderNav extends React.Component {
             home_header_nav = (
                 <div>
                     <Link to={`/${this.props.to_uid}/`} className={`home-header-nav-item text-center ${this.props.path_name == `/${this.props.to_uid}/` ? 'home-header-nav-item-active' : ''}`}>{this.props.to_acount}的主页</Link>
-                    <Link to={`/${this.props.to_uid}/blog/${this.props.to_uid}`} className={`home-header-nav-item text-center ${this.props.path_name == `/${this.props.to_uid}/blog/${this.props.to_uid}` ? 'home-header-nav-item-active' : ''}`}>{this.props.to_acount}的博客</Link>
+                    <Link to={`/${this.props.to_uid}/blog`} className={`home-header-nav-item text-center ${this.props.path_name == `/${this.props.to_uid}/blog` ? 'home-header-nav-item-active' : ''}`}>{this.props.to_acount}的博客</Link>
                     <Link to={`/${this.props.to_uid}/comment`} className={`home-header-nav-item text-center ${this.props.path_name == `/${this.props.to_uid}/comment` ? 'home-header-nav-item-active' : ''}`}>{this.props.to_acount}的留言版</Link>
                     <NeadLoginButton className="home-header-nav-item text-center" component={HomeHeaderNavButton} context="我的博客" link_to={`/home/blog/myblog`}/>
                     <LogoutButton className="home-header-nav-item text-center"/>

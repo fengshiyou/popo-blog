@@ -5,11 +5,11 @@ class LogoutButton extends React.Component{
     constructor(){
         super();
         this.logout =() => {
+            location.reload();
             localStorage.removeItem("token");
             localStorage.removeItem("uid");
             localStorage.removeItem("user_name");
             localStorage.removeItem("acount");
-            location.reload();
             this.props.history.push('/home/blog/home');
         }
     }
