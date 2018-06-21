@@ -12,6 +12,7 @@ function fetch(login_fail) {
             url,
             type: "POST",
             post_params: {},
+            mask_closable:false,
             success: response => {
                 if (response.data.code == 200) {
                     dispatch({type: "SERVER_CATALOGLIST", items: response.data.data})

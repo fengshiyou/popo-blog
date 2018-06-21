@@ -58,6 +58,7 @@ class Login extends React.Component {
         this.setState({
             visible: this.props.visible,
             mask_closable: this.props.mask_closable === undefined ? true : this.props.mask_closable,
+            error_msg:this.props.mask_closable === false?"您的登陆信息已经过期！":""
         });
     }
 
@@ -126,7 +127,6 @@ class Login extends React.Component {
     }
 
     _handleCancel(e) {
-        console.log(this.state.mask_closable)
         if (!this.state.mask_closable) {
             return;
         }
