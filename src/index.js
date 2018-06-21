@@ -65,7 +65,9 @@ ReactDOM.render(
             <div>
                 <Route path={`/:to_uid/`} component={HomeHeader}/>
                 <Route exact path={`/:to_uid/`} component={HomeBody}/>
-                <Route path={`/:to_uid/blog/:blog_type`} component={BlogListBody}/>
+                <PrivateRoute path={`/home/blog/myblog`} component={BlogListBody}/>
+                <Route path={`/:to_uid/blog/home`} component={BlogListBody}/>
+                <Route exact path={`/:to_uid/blog/`} component={BlogListBody}/>
                 <Route path={`/:to_uid/article/:id`} component={BlogArticle}/>
                 <Route path={`/:to_uid/comment`} component={CommentToUser}/>
                 <Route path={`/home/setting/:type`} component={Setting}/>

@@ -7,6 +7,7 @@ import {getMyCatalog,mapStateToProps} from '../../action/myCatalogAction'
 class CatalogSelect extends React.Component {
     constructor() {
         super();
+        this.state={login:null}
         //value 是antd-Cascader种的所有选中项的value
         this.onChang = (value) => this._onChange(value)
         //格式化catalog_list
@@ -23,8 +24,11 @@ class CatalogSelect extends React.Component {
     componentDidMount() {
         //通过store的中间件修改过的dispatch  dispatch()   if (typeof action === 'function') {return action(dispatch, getState, extraArgument);}
         const {dispatch} = this.props;
-        //通过action生成数据
-        dispatch(getMyCatalog());
+        const login_fail = (login_node) => {
+            this.setState({login: login_node})
+        };
+        //个人博客 通过action生成数据
+        dispatch(getMyCatalog(login_fail));
     }
 
     //格式化catalog_list
@@ -49,7 +53,10 @@ class CatalogSelect extends React.Component {
         //格式化数据并且赋值给this.state.catalog_list
         let catalog_list = this.formatCatalogList(this.props.items);
         return (
+            <div>
             <Cascader options={catalog_list} onChange={this.onChang} changeOnSelect defaultValue={[this.props.defaultValue]}/>
+                {this.state.login}
+            </div>
         )
     }
 }

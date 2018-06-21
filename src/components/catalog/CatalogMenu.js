@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import CatalogEditDialog from './CatalogEditDialog'
 import {getMyCatalog, mapStateToProps, initMyCatalog} from '../../action/myCatalogAction'
-import {getConfig,myAxios} from "../../until/Tool";
+import {getConfig, myAxios} from "../../until/Tool";
 
 
 class CatalogMenu extends React.Component {
@@ -18,6 +18,7 @@ class CatalogMenu extends React.Component {
                 opacity: 0
             },
             list: [],//列表   查看他人博客的时候使用
+            login: null,
         };
         //格式化catalog_menu
         this.formatCatalogMenu = (catalog_list) => this._formatCatalogMenu(catalog_list);
@@ -31,6 +32,8 @@ class CatalogMenu extends React.Component {
         this.afterCloseEditModal = () => this._afterCloseEditModal();
         //设置按钮透明度
         this.setEditButtonOp = (e, id, ratio) => this._setEditButtonOp(e, id, ratio);
+        //获取目录
+        this.setCatalogData = (props) => this._setCatalogData(props)
     }
 
     //关闭修改属性的对话框
@@ -71,36 +74,29 @@ class CatalogMenu extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.blog_type == "myblog") {//myblog:个人博客(显示个人目录) user:他人博客(显示他人目录)
-            //通过store的中间件修改过的dispatch  dispatch()   if (typeof action === 'function') {return action(dispatch, getState, extraArgument);}
-            const {dispatch} = this.props;
-            //个人博客 通过action生成数据
-            dispatch(getMyCatalog());
-        } else {
-            const url = getConfig('request_get_catalog') + "?uid=" + this.props.blog_type;
-            //他人博客  去后台获取
-            myAxios({
-                url,
-                type:'get',
-                successCallBack:response => {
-                    this.setState({list: response.data.data})
-                }
-            });
-        }
+        this.setCatalogData(this.props);
     }
+
     componentWillReceiveProps(newProps) {
-        if (newProps.blog_type == "myblog") {//myblog:个人博客(显示个人目录) user:他人博客(显示他人目录)
+        this.setCatalogData(newProps);
+    }
+
+    _setCatalogData(props) {
+        if (props.blog_type == "myblog") {//myblog:个人博客(显示个人目录) user:他人博客(显示他人目录)
             //通过store的中间件修改过的dispatch  dispatch()   if (typeof action === 'function') {return action(dispatch, getState, extraArgument);}
             const {dispatch} = this.props;
+            const login_fail = (login_node) => {
+                this.setState({login: login_node})
+            };
             //个人博客 通过action生成数据
-            dispatch(getMyCatalog());
+            dispatch(getMyCatalog(login_fail));
         } else {
-            const url = getConfig('request_get_catalog') + "?uid=" + newProps.blog_type;
+            const url = getConfig('request_get_catalog') + "?uid=" + props.blog_type;
             //他人博客  去后台获取
             myAxios({
                 url,
-                type:'get',
-                successCallBack:response => {
+                type: 'get',
+                successCallBack: response => {
                     this.setState({list: response.data.data})
                 }
             });
@@ -246,6 +242,7 @@ class CatalogMenu extends React.Component {
                 {menu_title}
                 {catalog_list}
                 {this.state.edit_modal}
+                {this.state.login}
             </div>
         )
     }

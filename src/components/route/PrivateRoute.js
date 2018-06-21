@@ -12,6 +12,7 @@ export default ({component:Component,...rest}) => {
     rest.path = rest.path.split("/:")[0]
 
     if(localStorage.getItem('token')){//验证登陆
+        console.log(rest)
         return (
             <Route {...rest} component={Component}/>
         )

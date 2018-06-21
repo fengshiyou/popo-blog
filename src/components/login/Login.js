@@ -16,7 +16,7 @@ class Login extends React.Component {
             passwd_check: "",//密码确认
             error_msg: null,//错误信息
             type: 1 //类型 1登陆 2注册
-        }
+        };
         this.showModal = () => this._showModal()
         //确认
         this.handleOk = (e) => this._handleOk(e)
@@ -126,6 +126,9 @@ class Login extends React.Component {
     }
 
     _handleCancel(e) {
+        if(!this.state.mask_closable){
+            return;
+        }
         this.setState({
             visible: false,
         });

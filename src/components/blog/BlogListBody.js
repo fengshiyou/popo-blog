@@ -10,8 +10,15 @@ import {withRouter} from 'react-router-dom'
 
 class BlogListBody extends React.Component {
     render() {
-        const blog_type = this.props.match.params.blog_type;
-        const to_uid = this.props.match.params.to_uid;
+        let to_uid = this.props.match.params.to_uid;
+        let blog_type = to_uid;
+        if(this.props.match.url == "/home/blog/home"){//博客大厅
+            blog_type = 'home';
+        }
+        if(this.props.match.url == "/home/blog/myblog"){//博客大厅
+            blog_type = 'myblog';
+            to_uid = 'home';
+        }
 
         //我的博客 blog_type == 'myblog'
         //博客大厅 blog_type == 'home'

@@ -59,7 +59,7 @@ class BlogListItem extends React.Component {
         if(this.props.blog_uid == localStorage.getItem('uid')){
             user_href = `/#/home/blog/myblog`;
         }else{
-            user_href = `/#/${this.props.blog_uid}/blog/${this.props.blog_uid}`
+            user_href = `/#/${this.props.blog_uid}/blog`
         }
         return (
             <div className="blog-item">

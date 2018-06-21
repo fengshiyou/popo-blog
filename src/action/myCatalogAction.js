@@ -1,18 +1,27 @@
 import {getConfig,myAxios} from '../until/Tool'
+import LCAxios from '../until/LoginCheckAxios'
 
 //请求后台数据
-function fetch() {
+function fetch(login_fail) {
     return dispatch => {
         //请求中的dispatch
         dispatch({type: "REQUEST_CATALOGLIST"})
         const url = getConfig("request_get_my_catalog");
-        let post_params = {};
-        myAxios({
+
+        LCAxios({
             url,
-            type:'post',
-            successCallBack:response => {
-                dispatch({type: "SERVER_CATALOGLIST", items: response.data.data})
-            }
+            type: "POST",
+            post_params: {},
+            success: response => {
+                if (response.data.code == 200) {
+                    dispatch({type: "SERVER_CATALOGLIST", items: response.data.data})
+                } else {
+                    alert(response.data.msg)
+                }
+            },
+            failSet: (login_node) => {
+                login_fail(login_node);
+            },
         });
     }
 }
@@ -35,11 +44,11 @@ export function initMyCatalog() {
     }
 }
 
-export function getMyCatalog() {
+export function getMyCatalog(login_fail) {
     return (dispatch, getState) => {
         //判断是否已经有数据  没有数据则请求后台
         if (shouldFetch(getState())) {
-            return dispatch(fetch())
+            return dispatch(fetch(login_fail))
         }
     }
 }
