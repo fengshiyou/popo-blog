@@ -2,7 +2,7 @@ import axios from 'axios'
 import {myAxios} from '../until/Tool'
 import React from 'react'
 import Login from '../components/login/Login'
-
+//@todo 登陆验证axios 高阶函数
 export default function loginCheckAxios({...params}) {
     let {url, success, failSet, type, post_params,mask_closable} = params;
     myAxios({

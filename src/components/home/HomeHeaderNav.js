@@ -4,7 +4,7 @@ import {Button} from 'antd'
 import NeadLoginButton from "../login/NeadLoginButton"
 import LogoutButton from '../login/LogoutButton'
 import HomeHeaderNavButton from './HomeHeaderNavButton'
-
+//@todo active 当前活动
 export default class HomeHeaderNav extends React.Component {
     render() {
         let home_header_nav = '';

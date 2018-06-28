@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+//@todo tool中的所有
 const getHeightByRadio = (radio = 1) => {
     //获取浏览器高度
     const client_height = document.documentElement.clientHeight || document.body.clientHeight;

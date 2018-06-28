@@ -7,6 +7,7 @@ export const local_request_get_catalog = "http://192.168.150.150:8090/api/blog/g
 export const local_request_get_my_catalog = "http://192.168.150.150:8090/api/blog/getMyCatalogList";
 export const local_request_get_blog_list = "http://192.168.150.150:8090/api/blog/getList";
 export const local_request_blog_article = "http://192.168.150.150:8090/api/blog/getContent";
+export const local_request_blog_setDisplay = "http://192.168.150.150:8090/api/blog/setDisplay";
 export const local_request_get_edit_content = "http://192.168.150.150:8090/api/blog/getEditContent";
 export const local_request_rename_catalog = "http://192.168.150.150:8090/api/blog/renameCatalog";
 export const local_request_add_catalog = "http://192.168.150.150:8090/api/blog/newCatalog";
@@ -34,7 +35,7 @@ export const local_request_reset_user_passwd = "http://192.168.150.150:8090/api/
 export const local_request_set_user_enabled = "http://192.168.150.150:8090/api/user/setEnabled";
 export const local_request_set_user_power_role = "http://192.168.150.150:8090/api/user/setPowerRole";
 export const local_request_get_log_list = "http://192.168.150.150:8090/api/log/getList";
-export const local_request_get_web_url_list = "http://192.168.150.150:8090/api/WebUrl/getList";
+export const local_request_get_web_url_list = "http://192.168.150.150:8090/api/weburl/getList";
 
 export const pro_request_get_member_info_simplify = "http://blogapi.fsy.space/api/user/getMemberInfoSimplify";
 export const pro_request_get_member_info_detail = "http://blogapi.fsy.space/api/user/getMemberInfoDetail";
@@ -45,6 +46,8 @@ export const pro_request_get_catalog = "http://blogapi.fsy.space/api/blog/getCat
 export const pro_request_get_my_catalog = "http://blogapi.fsy.space/api/blog/getMyCatalogList";
 export const pro_request_get_blog_list = "http://blogapi.fsy.space/api/blog/getList";
 export const pro_request_blog_article = "http://blogapi.fsy.space/api/blog/getContent";
+export const pro_request_blog_setDisplay = "http://blogapi.fsy.space/api/blog/setDisplay";
+
 export const pro_request_get_edit_content = "http://blogapi.fsy.space/api/blog/getEditContent";
 export const pro_request_rename_catalog = "http://blogapi.fsy.space/api/blog/renameCatalog";
 export const pro_request_add_catalog = "http://blogapi.fsy.space/api/blog/newCatalog";

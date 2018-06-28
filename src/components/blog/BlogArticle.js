@@ -4,12 +4,11 @@ import Menu from '../article/Menu'
 import {Row, Col, Affix} from 'antd'
 import {getHeightByRadio, getConfig,myAxios} from '../../until/Tool'
 import {withRouter} from 'react-router-dom'
-
+//@todo withRouter
 
 class BlogArticle extends React.Component {
     constructor() {
         super();
-        //@todo 正在加载中的设计
         this.state = {content: "正在加载中", menu_list: null}
     }
 

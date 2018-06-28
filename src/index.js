@@ -4,7 +4,8 @@ import {Provider} from 'react-redux'
 import {HashRouter, Route,Redirect} from "react-router-dom"
 import HomeHeader from './components/home/HomeHeader'
 import HomeFooter from './components/home/HomeFooter'
-
+//@todo  整理 IE报错 Promise未定义的错误 https://www.cnblogs.com/XHappyness/p/7919610.html
+import 'babel-polyfill'
 import PrivateRoute from './components/route/PrivateRoute'
 //@todo 按需加载   日志记起
 import EidtorCom from 'bundle-loader?lazy&name=app-[name]!./components/editor/Editor'

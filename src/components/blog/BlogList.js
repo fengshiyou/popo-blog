@@ -4,7 +4,7 @@ import axios from 'axios'
 import {Pagination, Button} from 'antd'
 import NeadLoginButton from '../login/NeadLoginButton'
 import {getConfig, myAxios} from "../../until/Tool"
-
+//@todo 登陆按钮封装
 export default class BlogList extends React.Component {
     constructor() {
         super();
@@ -81,6 +81,7 @@ export default class BlogList extends React.Component {
                             blog_type={blog_type}
                             acount={value.acount}
                             content_id={value.content_id}
+                            display={value.display}
                         />)
                     });
                     const page = <Pagination showQuickJumper defaultCurrent={response.data.data.page_no} total={response.data.data.total} defaultPageSize={response.data.data.per_page} onChange={this.setPageNo}/>

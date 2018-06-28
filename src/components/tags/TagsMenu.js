@@ -16,7 +16,7 @@ class TagsMenu extends React.Component {
         const blog_type = this.props.blog_type;
         tags.map(function (val, key, arr) {
             return_tags.push(
-                <Link to={`/${to_uid}/blog/${blog_type}?tag_id=${val.id}`} key={key}><Tag color={val.color}>{val.name}</Tag></Link>
+                <Link to={`/${to_uid}/blog/${blog_type}?tag_id=${val.id}`} key={key}><Tag className="margin-t-5" color={val.color}>{val.name}</Tag></Link>
             )
         });
         return return_tags

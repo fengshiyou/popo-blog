@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route} from "react-router-dom"
 import Login from '../../components/login/Login'
-
+//@todo 高阶组件 私有路由
 export default ({component:Component,...rest}) => {
     //获取当前路由
     let path = window.location.href.replace(window.location.origin,'');
@@ -12,7 +12,6 @@ export default ({component:Component,...rest}) => {
     rest.path = rest.path.split("/:")[0]
 
     if(localStorage.getItem('token')){//验证登陆
-        console.log(rest)
         return (
             <Route {...rest} component={Component}/>
         )

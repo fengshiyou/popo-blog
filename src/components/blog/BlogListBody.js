@@ -2,7 +2,6 @@ import React from 'react'
 import BlogList from './BlogList'
 
 import {Row, Col} from 'antd'
-import {Provider} from 'react-redux'
 import {getHeightByRadio} from '../../until/Tool'
 import BlogLIstRightMenu from "./BlogLIstRightMenu";
 import {withRouter} from 'react-router-dom'

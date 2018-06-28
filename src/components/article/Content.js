@@ -3,6 +3,7 @@ import Marked from 'marked'
 import HighLight from 'highlight.js'
 import Comment from '../comment/Comment'
 import "../../css/content/Content.css"
+//@todo highlight.js 使用
 
 
 export default class Content extends React.Component {

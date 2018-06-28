@@ -3,6 +3,8 @@ import thunkMiddleWare from 'redux-thunk' //中间件 修改dispatch  dispatch()
 import {catalogReducer} from '../action/myCatalogAction'  //文章目录的Reducer
 import {tagsReducer} from '../action/tagsAction'  //标签的Reducer
 import {userDetailReducer} from '../action/userDetailAction'  //标签的Reducer
+//@todo redux使用
+//@todo 组合reducer
 
 //组合reducer
 var Reducer = combineReducers({

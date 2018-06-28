@@ -3,7 +3,7 @@ const webpack = require("webpack");
 var ROOT_PATH = path.resolve(__dirname);//根目录
 var APP_PATH = path.resolve(ROOT_PATH,'src');//代码目录
 var BUILD_PATH = path.resolve(ROOT_PATH,'build');//webpack 打包目录
-const extractTextPlugin = require("extract-text-webpack-plugin");
+const extractTextPlugin = require("extract-text-webpack-plugin");// css分离
 
 
 var glob = require('glob');
@@ -77,7 +77,7 @@ module.exports = {
     plugins: [
         //@todo 整理 用于压缩js文件
         new uglify(),
-        new extractTextPlugin("/css/index.css"),  // /css/index.css是分离后的路径位置
+        new extractTextPlugin("/css/index.css"),  //@todo css分离 /css/index.css是分离后的路径位置
         new webpack.DefinePlugin({
             "process.env": {
                 "NODE_ENV": JSON.stringify("production")

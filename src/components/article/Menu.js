@@ -1,6 +1,6 @@
 import React from 'react'
 import "../../css/content/Menu.css"
-
+//@todo scrollIntoView
 export default class Menu extends React.Component{
     scrollIntoContent(event){
         const name = event.target.getAttribute("name");
