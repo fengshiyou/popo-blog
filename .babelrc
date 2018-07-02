@@ -1,5 +1,6 @@
 {
   "presets": ["es2015","react", "stage-3"],
+  //@todo propTypes http://www.css88.com/react/docs/typechecking-with-proptypes.html
 //@todo  antd按需加载 https://www.cnblogs.com/yswz/p/7165031.html
   "plugins":[["import", {"libraryName": "antd", "style": "css"}]]
 }
