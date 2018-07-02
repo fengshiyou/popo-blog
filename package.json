@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NODE_ENV=production webpack-dev-server --open --hot --config webpack.dev.config.js",
+    "dev": "cross-env NODE_ENV=production webpack-dev-server --open --hot",
     "pro": "better-npm-run pro",
-    "build-dev": "cross-env NODE_ENV=production webpack --progress --config webpack.dev.config.js --hide-modules",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --config webpack.pro.config.js --hide-modules",
   },
   "betterScripts": {
     "pro": {
