@@ -1,1 +1,1 @@
-export const dev =  "local";
+export const dev =  "pro";
